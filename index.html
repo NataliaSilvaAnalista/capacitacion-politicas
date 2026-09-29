@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Políticas internas de Fractal · Capacitación</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --azul:#343265; --verde:#2AA539; --naranja:#E9521D;
+  --verde-hoja:#72B92C; --azul-hoja:#244A95; --gris:#3F3F3F; --fondo:#F8F9F6;
+  --linea:#DCDFD6; --blanco:#FFFFFF;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 90px)}
+body{margin:0;background:var(--fondo);color:var(--gris);
+  font-family:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  font-size:16px;line-height:1.6}
+a{color:var(--azul-hoja)}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--naranja);outline-offset:2px}
+
+.barra{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--azul);color:#fff}
+.barra-in{max-width:760px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.marca{font-weight:800;font-size:1.05rem;white-space:nowrap}
+.marca small{display:block;font-weight:500;font-size:.68rem;opacity:.8}
+.pasos{display:flex;gap:4px;margin-left:auto}
+.paso{background:transparent;border:0;color:#fff;opacity:.7;padding:8px 10px;border-radius:6px;font-size:.8rem;font-weight:600;white-space:nowrap}
+.paso[aria-current="page"]{opacity:1;background:rgba(255,255,255,.14)}
+@media (max-width:560px){.barra-in{gap:6px}.pasos{margin-left:0;width:100%;justify-content:space-between}.paso{padding:6px 6px;font-size:.74rem}}
+
+main{max-width:760px;margin:0 auto;padding:24px 16px 64px}
+h1{color:var(--azul);font-weight:800;font-size:clamp(1.7rem,5vw,2.4rem);line-height:1.15;margin:.2em 0 .4em}
+h2{color:var(--azul);font-weight:700;font-size:1.35rem;line-height:1.25;margin:0 0 .5em}
+h3{font-size:1rem;margin:1.2em 0 .3em;color:var(--azul)}
+p{margin:0 0 1em;max-width:68ch}
+.vista{display:none}
+.vista.activa{display:block}
+
+.circulos{width:100%;max-width:420px;display:block;margin:8px auto 4px}
+.circulo{cursor:pointer}
+.circulo circle{transition:fill-opacity .35s ease}
+.circulo text{font-weight:700;font-size:15px;pointer-events:none}
+.circulo:focus{outline:none}
+.circulo:focus-visible circle{stroke-width:6}
+.leyenda-circ{text-align:center;font-size:.85rem;margin:0 auto 24px;max-width:46ch}
+.progreso{background:var(--blanco);border:1px solid var(--linea);border-radius:10px;padding:16px 18px;margin:20px 0}
+.progreso ul{margin:.3em 0 0;padding-left:1.2em}
+.progreso li{margin:.2em 0}
+.ok{color:var(--verde);font-weight:700}
+.pend{color:#8a8a8a}
+
+.btn{display:inline-block;border:0;border-radius:8px;padding:12px 20px;font-weight:700;font-size:.95rem;text-decoration:none;text-align:center}
+.btn-p{background:var(--naranja);color:#fff}
+.btn-s{background:transparent;color:var(--azul);border:2px solid var(--azul)}
+.acciones{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+
+/* Ilustraciones */
+.ilus{display:block;width:100%;height:auto;border-radius:12px}
+.ilus-bloque{float:right;width:120px;margin:0 0 8px 14px}
+@media (max-width:420px){.ilus-bloque{width:92px}}
+@keyframes flotar{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes latir{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(1.08)}}
+@keyframes vibrar{0%,100%{transform:rotate(0)}20%{transform:rotate(-8deg)}40%{transform:rotate(8deg)}60%{transform:rotate(-5deg)}80%{transform:rotate(5deg)}}
+@keyframes parpadeo{0%,100%{opacity:1}50%{opacity:.25}}
+@keyframes correr{from{transform:translateX(0)}to{transform:translateX(-40px)}}
+@keyframes cinta{from{transform:translateX(0)}to{transform:translateX(60px)}}
+@keyframes subir{0%{transform:translateY(0);opacity:.9}100%{transform:translateY(-26px);opacity:0}}
+@keyframes rebote{0%,100%{transform:translateY(0)}40%{transform:translateY(-5px)}}
+.a-flotar{animation:flotar 3s ease-in-out infinite;transform-box:fill-box}
+.a-latir{animation:latir 1.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.a-vibrar{animation:vibrar 1.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.a-parpadeo{animation:parpadeo 1.6s ease-in-out infinite}
+.a-correr{animation:correr 1s linear infinite}
+.a-cinta{animation:cinta 4s linear infinite}
+.a-subir{animation:subir 2.4s ease-out infinite;transform-box:fill-box}
+.a-subir.d2{animation-delay:.8s}.a-subir.d3{animation-delay:1.6s}
+.a-rebote{animation:rebote 1.4s ease-in-out infinite;transform-box:fill-box}
+
+.bloques{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 20px}
+.bloque-btn{border:2px solid var(--c);background:var(--blanco);color:var(--gris);border-radius:999px;padding:8px 16px;font-weight:600;font-size:.88rem;display:flex;align-items:center;gap:8px}
+.bloque-btn::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--c)}
+.bloque-btn[aria-pressed="true"]{background:var(--c);color:#fff}
+.bloque-btn[aria-pressed="true"]::before{background:#fff}
+.intro-bloque{border-left:4px solid var(--c);padding:2px 0 2px 14px;margin-bottom:18px;overflow:hidden}
+.intro-bloque p{margin:.3em 0}
+.limpiar{clear:both}
+details.ficha{background:var(--blanco);border:1px solid var(--linea);border-left:6px solid var(--c);border-radius:8px;margin:0 0 12px}
+details.ficha summary{list-style:none;padding:14px 16px;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center}
+details.ficha summary::-webkit-details-marker{display:none}
+.f-tit{font-weight:700;color:var(--azul);line-height:1.3}
+.f-cod{font-size:.78rem;color:#6b6b6b;grid-column:1}
+.f-est{grid-row:1 / span 2;grid-column:2;font-size:.78rem;font-weight:700;color:#9a9a9a}
+details.ficha[data-vista="1"] .f-est{color:var(--verde)}
+.f-cuerpo{padding:0 16px 16px}
+.f-cuerpo ul{padding-left:1.2em;margin:.3em 0 .8em}
+.f-cuerpo li{margin:.25em 0}
+.f-busca{font-size:1.02rem}
+.objetivos{display:grid;gap:8px;margin:.4em 0 1em}
+.objetivo{background:var(--fondo);border-radius:8px;padding:10px 12px;border-left:4px solid var(--c)}
+.pdf{display:inline-block;margin-top:4px;font-size:.88rem;font-weight:700;color:var(--azul);border:2px solid var(--azul);border-radius:8px;padding:8px 14px;text-decoration:none}
+
+.tarjeta{background:var(--blanco);border:1px solid var(--linea);border-radius:12px;padding:16px}
+.tarjeta .ilus{margin-bottom:14px}
+.lugar{display:inline-block;font-size:.78rem;font-weight:700;color:#fff;background:var(--azul-hoja);padding:3px 10px;border-radius:999px;margin-bottom:10px}
+.situacion{font-size:1.06rem;font-weight:500}
+.cuenta{display:flex;justify-content:space-between;font-size:.85rem;color:#6b6b6b;margin-bottom:10px}
+.barra-avance{height:6px;background:var(--linea);border-radius:99px;margin-bottom:14px;overflow:hidden}
+.barra-avance span{display:block;height:100%;background:var(--verde);transition:width .3s}
+.opciones{display:grid;gap:8px;margin-top:12px}
+.opcion{text-align:left;background:var(--fondo);border:2px solid var(--linea);border-radius:8px;padding:12px 14px;font-weight:600;color:var(--gris)}
+.opcion:hover:not(:disabled){border-color:var(--azul)}
+.opcion.bien{border-color:var(--verde);background:#e9f6ec}
+.opcion.mal{border-color:var(--naranja);background:#fdeee8}
+.opcion:disabled{cursor:default}
+.retro{margin-top:14px;padding:14px;border-radius:8px;background:var(--fondo)}
+.retro strong{display:block;margin-bottom:4px}
+.marcador{font-size:2.6rem;font-weight:800;color:var(--azul);line-height:1}
+.estado-ap{display:inline-block;margin-top:8px;font-weight:700;padding:4px 12px;border-radius:999px;color:#fff}
+.codigo{font-size:1.2rem;font-weight:800;letter-spacing:1px;color:var(--azul)}
+.datos-registro{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;background:var(--fondo);border-radius:8px;padding:12px 14px;margin:12px 0}
+
+.aviso{background:#fff7e0;border:1px solid #f0d58a;border-radius:8px;padding:14px 16px}
+.marco-form{width:100%;height:85vh;min-height:560px;border:0;border-radius:8px;background:#fff;margin-top:12px}
+
+footer{max-width:760px;margin:0 auto;padding:0 16px 32px;font-size:.78rem;color:#777}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header class="barra">
+  <div class="barra-in">
+    <div class="marca">Fractal<small>Estrategias Sostenibles</small></div>
+    <nav class="pasos" aria-label="Etapas de la capacitación">
+      <button class="paso" data-ir="inicio">1. Inicio</button>
+      <button class="paso" data-ir="politicas">2. Políticas</button>
+      <button class="paso" data-ir="practica">3. Situaciones</button>
+      <button class="paso" data-ir="registro" id="paso-reg">4. Registro</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="vista" id="v-inicio" aria-labelledby="t-inicio">
+    <h1 id="t-inicio">Nuestras políticas internas</h1>
+    <p>Respeto, cuidado del ambiente, calidad y seguridad: de eso tratan las políticas de Fractal. Conócelas en tres grupos y ponlas a prueba con situaciones reales del trabajo.</p>
+
+    <svg class="circulos" viewBox="0 0 340 300" role="group" aria-label="Grupos de políticas">
+      <g class="circulo" tabindex="0" role="button" data-bloque="etica" aria-label="Ética y derechos">
+        <circle cx="120" cy="105" r="88" fill="#E9521D" fill-opacity=".18" stroke="#E9521D" stroke-width="3"/>
+        <text x="86" y="90" text-anchor="middle" fill="#343265">Ética y</text>
+        <text x="86" y="108" text-anchor="middle" fill="#343265">derechos</text>
+      </g>
+      <g class="circulo" tabindex="0" role="button" data-bloque="sgi" aria-label="Calidad y ambiente">
+        <circle cx="220" cy="105" r="88" fill="#2AA539" fill-opacity=".18" stroke="#2AA539" stroke-width="3"/>
+        <text x="256" y="90" text-anchor="middle" fill="#343265">Calidad y</text>
+        <text x="256" y="108" text-anchor="middle" fill="#343265">ambiente</text>
+      </g>
+      <g class="circulo" tabindex="0" role="button" data-bloque="sst" aria-label="Seguridad y salud">
+        <circle cx="170" cy="195" r="88" fill="#343265" fill-opacity=".18" stroke="#343265" stroke-width="3"/>
+        <text x="170" y="230" text-anchor="middle" fill="#343265">Seguridad</text>
+        <text x="170" y="248" text-anchor="middle" fill="#343265">y salud</text>
+      </g>
+    </svg>
+    <p class="leyenda-circ">Toca un círculo para empezar. Se llena de color cuando revisas todas sus políticas.</p>
+
+    <div class="progreso" aria-live="polite">
+      <strong>Cómo funciona</strong>
+      <ul id="lista-progreso"></ul>
+      <p style="margin:.6em 0 0;font-size:.9rem">Para aprobar necesitas resolver bien 8 de las 10 situaciones. Si no lo logras, puedes repasar y volver a intentarlo: queda registrado tu último intento.</p>
+    </div>
+    <div class="acciones"><button class="btn btn-p" data-ir="politicas" id="btn-empezar">Empezar</button></div>
+  </section>
+
+  <section class="vista" id="v-politicas" aria-labelledby="t-politicas">
+    <h2 id="t-politicas">Las políticas</h2>
+    <p>Abre cada ficha para leerla. Al final de cada una está el documento oficial completo.</p>
+    <div class="bloques" role="group" aria-label="Elegir grupo" id="bloques"></div>
+    <div id="contenido-bloque"></div>
+    <div class="acciones">
+      <button class="btn btn-s" id="btn-sig-bloque">Siguiente grupo</button>
+      <button class="btn btn-p" data-ir="practica">Ir a las situaciones</button>
+    </div>
+  </section>
+
+  <section class="vista" id="v-practica" aria-labelledby="t-practica">
+    <h2 id="t-practica">¿Qué política aplica?</h2>
+    <p>Diez situaciones que pueden pasar en la oficina, en el CRV, en la planta de un cliente o en la vía. Elige la política que aplica: cada respuesta queda fija y cuenta para tu resultado.</p>
+    <div id="juego" aria-live="polite"></div>
+  </section>
+
+  <section class="vista" id="v-registro" aria-labelledby="t-registro">
+    <h2 id="t-registro">Registra tu participación</h2>
+    <div id="registro"></div>
+  </section>
+</main>
+
+<footer>
+  Fractal Estrategias Sostenibles S.A.S. · Documentos oficiales disponibles en <a href="https://www.estrategiasfractal.com/politicas" target="_blank" rel="noopener">estrategiasfractal.com/politicas</a>
+</footer>
+
+<script>
+/* ===== CONFIGURACIÓN =====
+   FORM_EMBED: URL de inserción del Microsoft Form.
+   FORM_LINK: enlace para compartir (respaldo si el formulario no carga incrustado).
+   PREFILL: se completa con el enlace de respuestas precargadas del Form.
+     base    -> parte del enlace precargado antes de los parámetros de respuesta
+     puntaje -> nombre del parámetro de la pregunta "Puntaje"
+     codigo  -> nombre del parámetro de la pregunta "Código de verificación"
+   Mientras PREFILL.base esté vacío, la página muestra puntaje y código para copiarlos. */
+const FORM_EMBED = "https://forms.cloud.microsoft/r/fJEXx00RaV?embed=true";
+const FORM_LINK = "https://forms.cloud.microsoft/r/fJEXx00RaV";
+const PREFILL = { base:"https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=4gQVdcz9A0qGVPi0UZ4icGqsCth4GARDhzN8wOZVCZ9UQzQ0Sk1DVFBHTkMxRkhOTjJTNUdSRDlIMS4u", puntaje:"r2b906b1ffb7641cd9c013930ca8177d5", codigo:"rce8b9ec705684cdebd4ac34620cdba3e" };
+const MINIMO = 8;
+
+const POLITICAS = [
+ {id:"ddhh", bloque:"etica", cod:"PT-GE-002", tit:"Política de Derechos Humanos", ver:"Primera versión · actualizada 13/11/2025",
+  pdf:"https://www.estrategiasfractal.com/_files/ugd/58e45f_43601a1996e24e2cb0fbe9b0e224bf1d.pdf",
+  busca:"Fractal se compromete a respetar los derechos humanos, prevenir impactos adversos, mitigar los que se presenten y remediar cuando corresponda.",
+  claves:["Aplica a colaboradores directos, contratistas, subcontratistas y proveedores cuando actúan en nombre de Fractal, y a las comunidades vinculadas a sus operaciones.",
+   "Se basa en los Principios Rectores de Naciones Unidas sobre Empresas y Derechos Humanos, los Convenios Fundamentales de la OIT y la Constitución Política de Colombia, entre otros.",
+   "Principios: dignidad humana, no discriminación, trabajo decente, respeto a las comunidades, ambiente sano, debida diligencia, remediación, transparencia y mejora continua.",
+   "Antes de nuevos proyectos u operaciones significativas se analizan los posibles impactos en derechos humanos."],
+  tuParte:["Su cumplimiento es obligatorio para todos en Fractal; el incumplimiento puede dar lugar a medidas disciplinarias, contractuales o legales.",
+   "Puedes presentar inquietudes o denuncias por canales confidenciales. Fractal garantiza la no represalia a quien los use de buena fe."]},
+ {id:"acoso", bloque:"etica", cod:"PT-GE-005", tit:"Prevención del Acoso Laboral y Sexual", ver:"Revisión del 15 de enero de 2025",
+  pdf:"https://www.estrategiasfractal.com/_files/ugd/58e45f_76553d431b254090b0e667dd96df3b6a.pdf",
+  busca:"Un entorno laboral seguro, incluyente y respetuoso. Fractal rechaza cualquier forma de acoso laboral, acoso sexual, hostigamiento o violencia en el trabajo.",
+  claves:["Se basa en la Ley 1010 de 2006.",
+   "Son ejemplos de posible acoso: agresiones físicas, verbales o psicológicas; expresiones humillantes o discriminatorias; burlas públicas; amenazas de despido injustificadas; jornadas excesivas sin sustento; mensajes ofensivos o anónimos y el aislamiento social deliberado.",
+   "Fractal trabaja en sensibilización, espacios de diálogo y bienestar, incluida la desconexión laboral como derecho."],
+  tuParte:["Reporta de forma confidencial cualquier conducta que pueda ser acoso por la Línea Ética (estrategiasfractal.com/lineaeticafractal), el correo juridica@estrategiasfractal.com o el +57 302 201 0702.",
+   "Incumplir esta política es falta grave según el Reglamento Interno de Trabajo y el Código Sustantivo del Trabajo."]},
+ {id:"asoc", bloque:"etica", cod:"PT-GE-006", tit:"Política de Derecho a la Asociación", ver:"Primera versión · actualizada 13/11/2025",
+  pdf:"https://www.estrategiasfractal.com/_files/ugd/58e45f_57891d06374b4884b4c52cb5528f3249.pdf",
+  busca:"Garantizar que quienes trabajan con Fractal puedan asociarse libremente para defender sus intereses, conforme a la legislación colombiana.",
+  claves:["Puedes constituir o afiliarte a asociaciones o sindicatos sin autorización previa de Fractal.",
+   "Pertenecer o no a una asociación no condiciona la contratación, la permanencia ni el acceso a beneficios, y no habrá represalias por ello.",
+   "Fractal reconoce el fuero sindical según la normativa laboral.",
+   "Aplica también a los operarios de Fractal ubicados en plantas de clientes, cuando su vinculación está bajo Fractal."],
+  tuParte:["Quienes participan en asociaciones deben actuar con respeto, responsabilidad, transparencia y buena fe en el diálogo.",
+   "La política indica que todos los trabajadores deben firmar acuse de recibo como parte de su vinculación."]},
+ {id:"genero", bloque:"etica", cod:"PT-GE-008", tit:"Inclusión de Género y Equidad", ver:"Primera versión · actualizada 01/02/2025",
+  pdf:"https://www.estrategiasfractal.com/_files/ugd/58e45f_1e2b620a9cff4c6cae26f2a90753bcef.pdf",
+  busca:"Igualdad de oportunidades, trato justo y un espacio laboral seguro y respetuoso, libre de discriminación por género, identidad de género, orientación sexual, edad, etnia, religión, condición física o cualquier otra característica.",
+  claves:["Principios: equidad, respeto, inclusión, no discriminación (cero tolerancia) y transparencia.",
+   "Procesos de selección y contratación libres de sesgos de género.",
+   "Mecanismos confidenciales y seguros para denunciar discriminación o acoso.",
+   "Aplica a colaboradores, contratistas, proveedores y aliados, sin importar cargo, tipo de vínculo o ubicación."],
+  tuParte:["Respetar y aplicar los principios y lineamientos de la política."]},
+ {id:"calidad", bloque:"sgi", cod:"PT-SGI-003", tit:"Política de Calidad", ver:"Primera versión · actualizada 13/11/2025",
+  pdf:"https://www.estrategiasfractal.com/_files/ugd/58e45f_52e903084c614dada2e875890b6f64e5.pdf",
+  busca:"Proporcionar soluciones en economía circular con altos estándares de calidad, profesionalismo y ética.",
+  objetivos:["Que los servicios cumplan el 100% de los requerimientos de los clientes.",
+   "Que el 100% de los colaboradores esté capacitado para sus funciones y las practique con ética.",
+   "Que todos los proyectos cumplan los requisitos legales, normativos y técnicos.",
+   "Que el 100% de los proyectos aporte al desarrollo y la prosperidad social."],
+  claves:["Enfoques: cliente, cumplimiento de requisitos, mejora continua, innovación y prosperidad.",
+   "Se comunica a todos los colaboradores y se revisa anualmente."],
+  tuParte:["Desarrollar tus funciones con la capacitación, la ética y el profesionalismo que la política establece como objetivo."]},
+ {id:"ambiental", bloque:"sgi", cod:"PT-SGI-004", tit:"Política Ambiental", ver:"Segunda versión · actualizada 02/07/2026",
+  pdf:"https://www.estrategiasfractal.com/_files/ugd/58e45f_47279a60edc14ea2ac6f6b0eadc10c13.pdf",
+  busca:"Su principio rector es el respeto y la conservación del ambiente y del patrimonio natural, impulsando la economía circular y el crecimiento verde.",
+  claves:["Optimizar el uso de recursos naturales y materias primas, priorizando insumos circulares y de bajo impacto.",
+   "Fomentar la eficiencia energética y la transición a energías limpias.",
+   "Prevenir, mitigar, compensar y restaurar los impactos ambientales propios y de los clientes.",
+   "Incorporar tecnologías y metodologías innovadoras, con mejora continua.",
+   "Promover la minimización, valorización y aprovechamiento de residuos.",
+   "Integrar criterios de responsabilidad social y ambiental en cada proyecto."],
+  objetivos:["Cumplir y promover el cumplimiento de la legislación ambiental.",
+   "Asignar recursos técnicos, financieros y humanos.",
+   "Hacer seguimiento, auditoría y verificación para la mejora continua.",
+   "Capacitar y sensibilizar a colaboradores, clientes, aliados y comunidades.",
+   "Potenciar el reciclaje, la recuperación y la reutilización, y reducir la generación de residuos."],
+  tuParte:["Aplica a todas las personas que hagan parte de cualquier proceso de Fractal: los principios anteriores se ponen en práctica en el trabajo diario."]},
+ {id:"sst", bloque:"sst", cod:"PT-SST-010", tit:"Política de Seguridad y Salud en el Trabajo", ver:"Primera versión · actualizada 07/05/2026",
+  pdf:"https://www.estrategiasfractal.com/_files/ugd/58e45f_3ab7cdedb96044f68be8ff0f593e49df.pdf",
+  busca:"Preservar la salud, la seguridad y la integridad de colaboradores y partes interesadas, identificando peligros y controlando riesgos para prevenir accidentes, enfermedades laborales y daños a la propiedad.",
+  claves:["Compromisos: identificar peligros y controlar riesgos, desarrollar programas de prevención, fomentar el autocuidado, cumplir la normatividad, exigir el cumplimiento a las partes interesadas y garantizar recursos.",
+   "Aplica a trabajadores, contratistas, subcontratistas, proveedores, visitantes y estudiantes en práctica."],
+  objetivosTitulo:"Objetivos del SG-SST 2025-2026",
+  objetivos:["Cumplir en 100% los requisitos legales y normas aplicables en seguridad y salud en el trabajo.",
+   "Garantizar el mejoramiento continuo, gestionando como mínimo el 95% de las acciones correctivas, preventivas y de mejora.",
+   "Identificar y controlar los riesgos, manteniendo la accidentalidad en un índice de frecuencia inferior al 1% mensual."],
+  tuParte:["Practicar el autocuidado y la responsabilidad individual y colectiva frente a la seguridad y la salud en el trabajo."]},
+ {id:"vial", bloque:"sst", cod:"PT-SST-011", tit:"Política de Seguridad Vial", ver:"Primera versión · actualizada 07/05/2026",
+  pdf:"https://www.estrategiasfractal.com/_files/ugd/58e45f_945fa3e841e5489abcecd57ee8414b8b.pdf",
+  busca:"Prevenir accidentes de tránsito y proteger la vida de todos los actores viales en las operaciones de Fractal.",
+  claves:["Aplica a conductores, acompañantes y peatones vinculados a las operaciones, dentro o fuera de la organización."],
+  tuParte:["Participar en campañas, capacitaciones y actividades de seguridad vial.",
+   "Hacer inspecciones preventivas a vehículos, rutas internas y zonas peatonales.",
+   "Cumplir el Código Nacional de Tránsito y las normas internas, y respetar los límites de velocidad.",
+   "No usar el celular ni otros dispositivos mientras conduces.",
+   "Usar siempre el cinturón de seguridad, tanto conductores como pasajeros.",
+   "Cumplir la política sobre consumo de sustancias psicoactivas.",
+   "Informar a tiempo cualquier condición de salud que pueda afectar la conducción segura."]},
+ {id:"epp", bloque:"sst", cod:"PT-SST-012", tit:"Uso de Elementos de Protección Personal", ver:"Primera versión · actualizada 07/05/2026",
+  pdf:"https://www.estrategiasfractal.com/_files/ugd/58e45f_991f07f5b5a043eba3275ef09af51d9d.pdf",
+  busca:"Proteger la salud y la integridad de los colaboradores con EPP certificados, adecuados a los riesgos de cada labor.",
+  claves:["Los EPP no eliminan los riesgos ni previenen por sí solos los accidentes, pero minimizan la severidad de posibles lesiones.",
+   "Hacen parte de un control integral que prioriza eliminar y mitigar los riesgos en la fuente y en el medio."],
+  tuParte:["Usar de manera correcta y permanente los EPP asignados: es obligatorio.",
+   "Mantenerlos en buen estado, limpios y bien guardados.",
+   "Reportar de inmediato pérdida, mal uso, deterioro o mal funcionamiento, para que se reemplacen sin demora.",
+   "Participar en la formación sobre uso, mantenimiento y almacenamiento."]},
+ {id:"spa", bloque:"sst", cod:"PT-SST-013", tit:"Prevención del Consumo de Sustancias Psicoactivas", ver:"Primera versión · actualizada 07/05/2026",
+  pdf:"https://www.estrategiasfractal.com/_files/ugd/58e45f_ff94949e5ce247388f795d89fa330317.pdf",
+  busca:"Prevenir el consumo de alcohol, tabaco y sustancias psicoactivas en el trabajo, y promover hábitos de vida saludables.",
+  claves:["Aplica en instalaciones propias y del cliente, sin importar cargo o modalidad de contratación."],
+  tuParte:["No presentarte a trabajar bajo los efectos de alcohol, drogas u otras sustancias psicoactivas.",
+   "No consumir alcohol ni sustancias estupefacientes durante la jornada.",
+   "No vender, almacenar ni distribuir alcohol u otras sustancias adictivas en las instalaciones.",
+   "No fumar en áreas no autorizadas por la empresa o el cliente.",
+   "Informar al líder inmediato o al área de SST si usas medicamentos prescritos que puedan afectar tu desempeño o tu seguridad."]},
+ {id:"reglamento", bloque:"sst", cod:"PG-SST-013", tit:"Reglamento de Higiene y Seguridad Industrial", ver:"Primera versión · actualizada 07/05/2026",
+  pdf:"https://www.estrategiasfractal.com/_files/ugd/58e45f_362ffdb75ef241199c146babd391d12b.pdf",
+  busca:"Establecer normas y prácticas básicas para prevenir accidentes y promover condiciones de trabajo seguras y saludables.",
+  claves:["Fractal está afiliada a la ARL SURA, con clase de riesgo III.",
+   "Riesgos identificados: biológicos, físicos, químicos, psicosociales, biomecánicos, condiciones de seguridad (mecánico, locativo, tecnológico, tránsito, públicos, alturas) y fenómenos naturales.",
+   "Los riesgos se controlan en la fuente, en el medio transmisor o en el trabajador.",
+   "Fractal promueve la constitución y el funcionamiento del COPASST.",
+   "El reglamento debe estar exhibido en al menos dos lugares visibles de la oficina principal y en los proyectos."],
+  tuParte:["Cumplir las disposiciones legales, las normas técnicas e internas de medicina preventiva, ambientes de trabajo y seguridad."]}
+];
+
+
+const BLOQUES = {
+  etica:{nombre:"Ética y derechos", hex:"#E9521D",
+    intro:"Cómo nos tratamos entre nosotros y con las personas que se relacionan con Fractal."},
+  sgi:{nombre:"Calidad y ambiente", hex:"#2AA539",
+    intro:"Los compromisos del Sistema de Gestión Integrado con los clientes y con el ambiente."},
+  sst:{nombre:"Seguridad y salud", hex:"#343265",
+    intro:"Cómo nos cuidamos en el trabajo, en la operación y en la vía."}
+};
+const ORDEN_BLOQUES = ["etica","sgi","sst"];
+
+/* ===== ILUSTRACIONES (SVG propias) ===== */
+const C = {az:"#343265", ve:"#2AA539", na:"#E9521D", vh:"#72B92C", ah:"#244A95", gr:"#3F3F3F", fo:"#EEF1E8", pi:"#E3B58F", pi2:"#B98563"};
+function persona(x,y,color,piel,esc){
+  esc = esc||1; piel = piel||C.pi;
+  return `<g transform="translate(${x},${y}) scale(${esc})"><circle cx="0" cy="-40" r="11" fill="${piel}"/><rect x="-14" y="-27" width="28" height="40" rx="11" fill="${color}"/></g>`;
+}
+function marco(contenido, alt){
+  return `<svg class="ilus" viewBox="0 0 320 170" role="img" aria-label="${alt}"><rect width="320" height="170" rx="14" fill="${C.fo}"/>${contenido}</svg>`;
+}
+const ILUS = {
+  acoso: ()=>marco(`
+    <rect x="0" y="140" width="320" height="30" fill="#DDE3D3"/>
+    <rect x="20" y="92" width="44" height="48" rx="4" fill="#C9D2BC"/><rect x="26" y="70" width="36" height="24" rx="4" fill="#D5DCC8"/>
+    ${persona(95,140,C.na)}${persona(128,140,C.ah,C.pi2)}${persona(161,140,C.ve)}
+    <g class="a-latir"><rect x="96" y="44" width="46" height="22" rx="11" fill="#fff"/><text x="119" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="${C.na}">jaja</text></g>
+    <g class="a-latir" style="animation-delay:.6s"><rect x="146" y="30" width="46" height="22" rx="11" fill="#fff"/><text x="169" y="46" text-anchor="middle" font-size="12" font-weight="700" fill="${C.na}">jaja</text></g>
+    <line x1="195" y1="118" x2="235" y2="118" stroke="${C.gr}" stroke-width="2" stroke-dasharray="4 5" opacity=".5"/>
+    ${persona(262,140,"#8C8FA3")}
+    <circle class="a-parpadeo" cx="262" cy="80" r="3" fill="${C.gr}"/>`,"Un grupo se burla de una persona que queda aislada"),
+  vial: ()=>marco(`
+    <rect x="0" y="104" width="320" height="50" fill="#5E6070"/>
+    <g class="a-correr"><g fill="#fff">${[0,1,2,3,4,5,6,7,8].map(i=>`<rect x="${i*40}" y="127" width="22" height="4" rx="2"/>`).join("")}</g></g>
+    <g class="a-flotar" style="animation-duration:.9s">
+      <rect x="92" y="84" width="120" height="34" rx="10" fill="${C.az}"/>
+      <path d="M116 84 L130 62 L180 62 L196 84 Z" fill="${C.az}"/>
+      <path d="M124 82 L134 67 L154 67 L154 82 Z M158 82 L158 67 L176 67 L188 82 Z" fill="#BFD4F2"/>
+      <circle cx="120" cy="120" r="11" fill="${C.gr}"/><circle cx="186" cy="120" r="11" fill="${C.gr}"/>
+      <circle cx="120" cy="120" r="4" fill="#ccc"/><circle cx="186" cy="120" r="4" fill="#ccc"/>
+    </g>
+    <g transform="translate(236,26)"><g class="a-vibrar"><rect x="0" y="0" width="26" height="44" rx="5" fill="${C.gr}"/><rect x="3" y="5" width="20" height="30" rx="2" fill="${C.vh}"/></g>
+    <path class="a-parpadeo" d="M-8 10 q-6 12 0 24 M34 10 q6 12 0 24" stroke="${C.na}" stroke-width="3" fill="none" stroke-linecap="round"/></g>`,"Un vehículo en la vía y un celular que suena"),
+  epp: ()=>marco(`
+    <rect x="0" y="118" width="320" height="16" fill="${C.gr}"/><circle cx="12" cy="126" r="8" fill="#777"/><circle cx="308" cy="126" r="8" fill="#777"/>
+    <g class="a-cinta"><rect x="-60" y="100" width="26" height="18" rx="3" fill="${C.ah}"/><rect x="10" y="96" width="20" height="22" rx="3" fill="${C.vh}"/><rect x="80" y="104" width="30" height="14" rx="3" fill="${C.na}"/><rect x="150" y="98" width="22" height="20" rx="3" fill="${C.ah}"/><rect x="220" y="102" width="28" height="16" rx="3" fill="${C.vh}"/></g>
+    <g transform="translate(150,14)">
+      <rect x="0" y="30" width="60" height="52" rx="14" fill="${C.ve}"/>
+      ${[0,1,2,3].map(i=>`<rect x="${2+i*15}" y="0" width="12" height="40" rx="6" fill="${C.ve}"/>`).join("")}
+      <rect x="-14" y="46" width="22" height="12" rx="6" fill="${C.ve}" transform="rotate(-30 -3 52)"/>
+      <path d="M22 36 l8 8 l-6 6 l9 9 l-5 7" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <rect x="4" y="82" width="52" height="14" rx="3" fill="#1F7E2C"/>
+    </g>
+    <g class="a-latir"><circle cx="248" cy="40" r="16" fill="${C.na}"/><text x="248" y="47" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">!</text></g>`,"Un guante de trabajo roto sobre la banda de clasificación"),
+  asoc: ()=>marco(`
+    <rect x="0" y="142" width="320" height="28" fill="#DDE3D3"/>
+    <path d="M18 142 V78 l34 -18 v18 l34 -18 v18 l34 -18 V142 Z" fill="#C9D2BC"/>
+    <rect x="100" y="36" width="14" height="42" fill="#B7C1A8"/>
+    <circle class="a-subir" cx="107" cy="30" r="7" fill="#D0D5DA"/><circle class="a-subir d2" cx="110" cy="30" r="6" fill="#D0D5DA"/><circle class="a-subir d3" cx="104" cy="30" r="5" fill="#D0D5DA"/>
+    <rect x="30" y="100" width="18" height="18" fill="#fff" opacity=".6"/><rect x="64" y="100" width="18" height="18" fill="#fff" opacity=".6"/>
+    ${persona(190,142,C.ah)}${persona(258,142,C.na,C.pi2)}
+    <g class="a-flotar"><rect x="160" y="40" width="62" height="34" rx="12" fill="#fff"/>
+      <circle cx="178" cy="57" r="5" fill="${C.az}"/><circle cx="191" cy="57" r="5" fill="${C.ve}"/><circle cx="204" cy="57" r="5" fill="${C.na}"/></g>
+    <text class="a-latir" x="258" y="80" text-anchor="middle" font-size="26" font-weight="800" fill="${C.az}">?</text>`,"Un operario en la planta de un cliente piensa en asociarse"),
+  spa: ()=>marco(`
+    <rect x="0" y="142" width="320" height="28" fill="#DDE3D3"/>
+    <rect x="176" y="60" width="118" height="82" rx="8" fill="${C.ah}"/><rect x="188" y="72" width="54" height="30" rx="4" fill="#BFD4F2"/>
+    <circle cx="268" cy="86" r="12" fill="#fff"/><line x1="268" y1="86" x2="275" y2="80" stroke="${C.na}" stroke-width="3"/>
+    <rect x="188" y="112" width="94" height="8" rx="4" fill="#fff" opacity=".5"/>
+    ${persona(120,142,C.ve)}
+    <text class="a-subir" x="134" y="84" font-size="16" font-weight="800" fill="${C.az}">z</text>
+    <text class="a-subir d2" x="142" y="80" font-size="20" font-weight="800" fill="${C.az}">Z</text>
+    <g transform="translate(34,80)"><rect x="0" y="12" width="36" height="50" rx="6" fill="${C.na}"/><rect x="-2" y="0" width="40" height="14" rx="3" fill="#fff"/><rect x="6" y="28" width="24" height="16" rx="2" fill="#fff"/><circle cx="12" cy="36" r="3" fill="${C.na}"/><circle cx="24" cy="36" r="3" fill="${C.na}"/></g>`,"Un medicamento que da sueño antes de operar un equipo"),
+  genero: ()=>marco(`
+    <rect x="30" y="118" width="260" height="10" rx="4" fill="#C9D2BC"/>
+    ${[0,1].map(i=>`<g transform="translate(${60+i*70},44)"><rect width="54" height="70" rx="6" fill="#fff"/><circle cx="27" cy="20" r="9" fill="${i?C.vh:C.ah}"/><rect x="12" y="36" width="30" height="4" rx="2" fill="#ccc"/><rect x="12" y="46" width="30" height="4" rx="2" fill="#ccc"/><rect x="12" y="56" width="20" height="4" rx="2" fill="#ccc"/></g>`).join("")}
+    <g class="a-flotar"><g transform="translate(212,36) rotate(14)"><rect width="54" height="70" rx="6" fill="#fff" stroke="${C.na}" stroke-width="3"/><circle cx="27" cy="20" r="9" fill="${C.na}"/><rect x="12" y="36" width="30" height="4" rx="2" fill="#ccc"/><rect x="12" y="46" width="30" height="4" rx="2" fill="#ccc"/></g></g>
+    <g class="a-latir"><path d="M258 18 l14 24 h-28 Z" fill="${C.na}"/><text x="258" y="38" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">!</text></g>`,"Hojas de vida en un proceso de selección, una descartada sin razón"),
+  ambiental: ()=>marco(`
+    <rect x="0" y="0" width="320" height="170" rx="14" fill="#2B2A4F"/>
+    <circle cx="270" cy="34" r="16" fill="#F4F1C9"/><circle cx="262" cy="30" r="14" fill="#2B2A4F"/>
+    <circle class="a-parpadeo" cx="210" cy="24" r="2" fill="#fff"/><circle class="a-parpadeo" style="animation-delay:.7s" cx="236" cy="54" r="2" fill="#fff"/>
+    <rect x="0" y="130" width="320" height="40" fill="#3D3C66"/>
+    <rect x="40" y="112" width="150" height="10" rx="3" fill="#8C7B6B"/><rect x="50" y="122" width="8" height="20" fill="#8C7B6B"/><rect x="172" y="122" width="8" height="20" fill="#8C7B6B"/>
+    <rect x="80" y="64" width="70" height="44" rx="4" fill="${C.gr}"/><rect class="a-parpadeo" x="85" y="69" width="60" height="34" fill="#9FD3FF"/><rect x="108" y="108" width="14" height="4" fill="${C.gr}"/>
+    <path d="M168 112 v-34 l-12 -10" stroke="#ccc" stroke-width="3" fill="none"/><path d="M146 60 l22 -4 l-6 16 Z" fill="#F4E27A"/>
+    <polygon class="a-parpadeo" points="150,74 186,112 128,112" fill="#F4E27A" opacity=".25"/>
+    <rect x="232" y="100" width="36" height="42" rx="4" fill="#8A8A8A"/><rect x="228" y="96" width="44" height="8" rx="3" fill="#6E6E6E"/>
+    <g class="a-flotar"><rect x="238" y="78" width="24" height="18" fill="#fff" transform="rotate(-12 250 87)"/></g>`,"Oficina de noche con equipos y luces encendidos y papel en la caneca equivocada"),
+  ddhh: ()=>marco(`
+    <rect x="0" y="136" width="320" height="34" fill="#DDE3D3"/>
+    ${[0,1,2].map(i=>`<g transform="translate(${22+i*52},92)"><rect width="42" height="44" fill="${[C.vh,"#E8C36A",C.ah][i]}"/><path d="M-4 2 L21 -18 L46 2 Z" fill="${[C.ve,C.na,C.az][i]}"/><rect x="15" y="22" width="12" height="22" fill="#fff" opacity=".7"/></g>`).join("")}
+    ${persona(96,136,C.na,C.pi2,.8)}
+    <rect x="214" y="44" width="8" height="92" fill="${C.na}"/><rect x="214" y="44" width="70" height="8" fill="${C.na}"/><line x1="276" y1="52" x2="276" y2="86" stroke="${C.gr}" stroke-width="2"/>
+    <rect class="a-flotar" x="266" y="86" width="20" height="14" fill="${C.ah}"/>
+    <path d="M240 136 l8 -20 l8 20 Z" fill="${C.na}"/><path d="M262 136 l8 -20 l8 20 Z" fill="${C.na}"/>
+    <path class="a-flotar" d="M170 34 q6 -6 12 0 q6 -6 12 0" stroke="${C.gr}" stroke-width="2" fill="none"/>`,"Un nuevo proyecto cerca de las casas de una comunidad"),
+  calidad: ()=>marco(`
+    <rect x="96" y="14" width="128" height="146" rx="8" fill="#fff"/><rect x="96" y="14" width="128" height="24" rx="8" fill="${C.ve}"/>
+    <text x="160" y="31" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">Requerimientos</text>
+    ${[0,1,2,3].map(i=>`<g transform="translate(110,${52+i*26})"><rect width="16" height="16" rx="3" fill="none" stroke="${i===2?C.na:C.ve}" stroke-width="2.5" class="${i===2?'a-parpadeo':''}"/>${i!==2?`<path d="M3 8 l4 4 l7 -9" stroke="${C.ve}" stroke-width="2.5" fill="none"/>`:""}<rect x="26" y="5" width="${[70,58,76,50][i]}" height="6" rx="3" fill="#D5D8DE"/></g>`).join("")}
+    <g class="a-flotar"><circle cx="252" cy="104" r="20" fill="none" stroke="${C.az}" stroke-width="6"/><line x1="266" y1="118" x2="284" y2="136" stroke="${C.az}" stroke-width="8" stroke-linecap="round"/></g>`,"Un informe con un requerimiento sin cumplir"),
+  reglamento: ()=>marco(`
+    <rect x="0" y="142" width="320" height="28" fill="#DDE3D3"/>
+    <rect x="44" y="20" width="150" height="104" rx="6" fill="#C9A77C"/><rect x="50" y="26" width="138" height="92" rx="4" fill="#D9BC92"/>
+    <rect x="80" y="36" width="78" height="72" fill="#fff"/><rect x="88" y="46" width="62" height="6" rx="3" fill="${C.az}"/>
+    ${[0,1,2,3,4].map(i=>`<rect x="88" y="${60+i*9}" width="${[60,54,62,48,56][i]}" height="4" rx="2" fill="#D5D8DE"/>`).join("")}
+    <circle class="a-rebote" cx="119" cy="36" r="5" fill="${C.na}"/>
+    <g transform="translate(250,142)"><circle cx="0" cy="-40" r="11" fill="${C.pi}"/><path d="M-14 -44 a14 13 0 0 1 28 0 Z" fill="#F2C230"/><rect x="-16" y="-45" width="32" height="4" rx="2" fill="#E0AE1A"/><rect x="-14" y="-27" width="28" height="40" rx="11" fill="${C.ah}"/></g>
+    <text class="a-latir" x="226" y="70" font-size="24" font-weight="800" fill="${C.az}">?</text>`,"Un colaborador nuevo frente al reglamento publicado"),
+  b_etica: ()=>`<svg class="ilus ilus-bloque" viewBox="0 0 120 90" aria-hidden="true"><rect width="120" height="90" rx="12" fill="#FCE3D9"/>${persona(40,80,C.na,C.pi,.9)}${persona(80,80,C.az,C.pi2,.9)}<path class="a-latir" d="M60 22 c-4 -8 -16 -6 -14 4 c2 6 14 12 14 12 s12 -6 14 -12 c2 -10 -10 -12 -14 -4 Z" fill="${C.na}"/></svg>`,
+  b_sgi: ()=>`<svg class="ilus ilus-bloque" viewBox="0 0 120 90" aria-hidden="true"><rect width="120" height="90" rx="12" fill="#DDF1E0"/><g class="a-flotar"><path d="M60 16 c26 0 34 22 26 44 c-24 4 -40 -8 -40 -26 c0 -8 6 -18 14 -18 Z" fill="${C.ve}"/><path d="M50 62 q10 -18 30 -32" stroke="#fff" stroke-width="3" fill="none"/></g><circle cx="32" cy="64" r="14" fill="${C.az}"/><path d="M25 64 l5 5 l9 -10" stroke="#fff" stroke-width="3" fill="none"/></svg>`,
+  b_sst: ()=>`<svg class="ilus ilus-bloque" viewBox="0 0 120 90" aria-hidden="true"><rect width="120" height="90" rx="12" fill="#E1E1EE"/><g class="a-flotar"><path d="M30 52 a30 28 0 0 1 60 0 Z" fill="#F2C230"/><rect x="24" y="50" width="72" height="9" rx="4" fill="#E0AE1A"/><rect x="56" y="22" width="8" height="30" rx="3" fill="#E0AE1A"/></g><path d="M86 62 l14 5 v9 c0 7 -6 11 -14 13 c-8 -2 -14 -6 -14 -13 v-9 Z" fill="${C.az}"/><path d="M80 75 l4 4 l7 -8" stroke="#fff" stroke-width="2.5" fill="none"/></svg>`
+};
+
+/* ===== SITUACIONES (evaluación) ===== */
+const ESCENARIOS = [
+ {id:"acoso", lugar:"CRV", txt:"Desde hace semanas, un compañero se burla de otra persona delante de todo el turno, le hace comentarios humillantes y la deja por fuera de las reuniones del equipo a propósito.",
+  ops:["acoso","asoc","calidad","vial"], ok:"acoso",
+  retro:"La política PT-GE-005, basada en la Ley 1010 de 2006, incluye como posibles conductas de acoso las burlas públicas, las expresiones humillantes y el aislamiento social deliberado. Se puede reportar de forma confidencial por la Línea Ética, juridica@estrategiasfractal.com o el +57 302 201 0702."},
+ {id:"vial", lugar:"En la vía", txt:"Vas manejando hacia una visita con un cliente, con una compañera de copiloto. Suena tu celular y es tu jefe.",
+  ops:["calidad","vial","genero","epp"], ok:"vial",
+  retro:"La PT-SST-011 pide no usar el celular ni otros dispositivos mientras se conduce, y exige el cinturón de seguridad tanto al conductor como a los pasajeros."},
+ {id:"calidad", lugar:"Oficina", txt:"Antes de enviar un informe a un cliente, revisas lo que pidió y notas que una de sus condiciones no quedó cumplida.",
+  ops:["ambiental","calidad","ddhh","reglamento"], ok:"calidad",
+  retro:"La PT-SGI-003 tiene como objetivo que los servicios cumplan el 100% de los requerimientos del cliente, y promueve la mejora continua en cada acción que realizamos."},
+ {id:"epp", lugar:"CRV", txt:"A mitad del turno de clasificación de material, tus guantes de trabajo se rompen.",
+  ops:["ambiental","ddhh","epp","spa"], ok:"epp",
+  retro:"La PT-SST-012 indica que todo EPP deteriorado, extraviado o defectuoso se reporta y se reemplaza sin demora, y que su uso correcto y permanente es obligatorio."},
+ {id:"asoc", lugar:"Planta de cliente", txt:"Un operario de Fractal que trabaja en la planta de un cliente quiere afiliarse a un sindicato, pero teme que eso afecte su contrato.",
+  ops:["asoc","acoso","calidad","reglamento"], ok:"asoc",
+  retro:"La PT-GE-006 establece que no se necesita autorización previa de Fractal, que afiliarse no condiciona la contratación ni la permanencia y que no habrá represalias. Aplica también a operarios en plantas de clientes cuya vinculación está bajo Fractal."},
+ {id:"spa", lugar:"CRV", txt:"El médico te formuló un medicamento que da somnolencia y hoy te corresponde operar equipos.",
+  ops:["genero","calidad","spa","asoc"], ok:"spa",
+  retro:"La PT-SST-013 considera una violación no informar al líder inmediato o al área de SST sobre medicamentos prescritos que puedan afectar el desempeño o la seguridad."},
+ {id:"genero", lugar:"Oficina", txt:"En un proceso de selección, alguien sugiere descartar a una candidata porque \"para ese cargo es mejor un hombre\".",
+  ops:["genero","calidad","vial","epp"], ok:"genero",
+  retro:"La PT-GE-008 busca procesos de selección libres de sesgos de género y plantea cero tolerancia a la discriminación, con mecanismos confidenciales para denunciarla."},
+ {id:"reglamento", lugar:"CRV", txt:"Una persona recién contratada llega al CRV y pregunta dónde puede consultar las normas básicas de higiene y seguridad, y cuáles son los riesgos de su trabajo.",
+  ops:["calidad","asoc","reglamento","genero"], ok:"reglamento",
+  retro:"El Reglamento de Higiene y Seguridad Industrial debe estar exhibido en al menos dos lugares visibles de la oficina principal y de los proyectos, y se da a conocer a cada trabajador al ingresar. Allí se listan los riesgos identificados y su control."},
+ {id:"ambiental", lugar:"Oficina", txt:"Al cerrar la oficina ves que quedan equipos y luces encendidos, y que el papel reciclable terminó en la caneca de residuos ordinarios.",
+  ops:["calidad","ambiental","reglamento","ddhh"], ok:"ambiental",
+  retro:"La PT-SGI-004 incluye entre sus principios la eficiencia energética y la minimización, valorización y aprovechamiento de residuos; entre sus objetivos, potenciar el reciclaje y reducir la generación de residuos."},
+ {id:"ddhh", lugar:"Nuevo proyecto", txt:"Fractal va a iniciar una operación en un sector donde vive una comunidad que podría verse afectada.",
+  ops:["epp","vial","ddhh","spa"], ok:"ddhh",
+  retro:"La PT-GE-002 compromete a Fractal a analizar los impactos en derechos humanos al inicio de nuevos proyectos y, cuando se afecten comunidades, a promover diálogo, consulta y participación con enfoque diferencial."}
+];
+
+/* ===== ESTADO ===== */
+const CLAVE = "fractal-politicas-v2";
+let estado = {vistas:[], resultado:null};
+try{ const g = localStorage.getItem(CLAVE); if(g){ estado = Object.assign(estado, JSON.parse(g)); } }catch(e){}
+function guardar(){ try{ localStorage.setItem(CLAVE, JSON.stringify(estado)); }catch(e){} }
+
+const porId = Object.fromEntries(POLITICAS.map(p=>[p.id,p]));
+const esc = s => String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function bloqueCompleto(b){ return POLITICAS.filter(p=>p.bloque===b).every(p=>estado.vistas.includes(p.id)); }
+function todoVisto(){ return POLITICAS.every(p=>estado.vistas.includes(p.id)); }
+
+/* Código de verificación: intento aleatorio (4 dígitos) + control de 2 dígitos
+   control = (intento*37 + puntaje*101) mod 97  -> se verifica en Excel */
+function generarCodigo(puntaje){
+  const intento = 1000 + Math.floor(Math.random()*9000);
+  const control = (intento*37 + puntaje*101) % 97;
+  return String(intento*100 + control);
+}
+
+/* ===== NAVEGACIÓN ===== */
+function ir(v){
+  document.querySelectorAll(".vista").forEach(s=>s.classList.toggle("activa", s.id==="v-"+v));
+  document.querySelectorAll(".paso").forEach(b=>{
+    if(b.dataset.ir===v) b.setAttribute("aria-current","page"); else b.removeAttribute("aria-current");
+  });
+  if(v==="registro") pintarRegistro();
+  if(v==="practica") pintarJuego();
+  window.scrollTo({top:0});
+}
+document.addEventListener("click", e=>{ const b = e.target.closest("[data-ir]"); if(b){ ir(b.dataset.ir); } });
+
+/* ===== INICIO ===== */
+function pintarInicio(){
+  document.querySelectorAll(".circulo").forEach(g=>{
+    const c = g.querySelector("circle"), completo = bloqueCompleto(g.dataset.bloque);
+    c.setAttribute("fill-opacity", completo ? ".9" : ".18");
+    g.querySelectorAll("text").forEach(t=>t.setAttribute("fill", completo ? "#FFFFFF" : "#343265"));
+    g.setAttribute("aria-label", BLOQUES[g.dataset.bloque].nombre + (completo ? ", revisado" : ", pendiente"));
+  });
+  const n = estado.vistas.length, r = estado.resultado;
+  document.getElementById("lista-progreso").innerHTML =
+    `<li class="${todoVisto()?'ok':''}">Lee las políticas <span class="${todoVisto()?'ok':'pend'}">(${n} de 11)</span></li>
+     <li class="${r?'ok':''}">Resuelve 10 situaciones <span class="${r?'ok':'pend'}">(${r ? r.puntaje + ' de 10' : 'pendiente'})</span></li>
+     <li>Registra tu participación</li>`;
+  document.getElementById("btn-empezar").textContent = (n||r) ? "Continuar" : "Empezar";
+}
+document.querySelectorAll(".circulo").forEach(g=>{
+  const abrir = ()=>{ bloqueSel = g.dataset.bloque; pintarPoliticas(); ir("politicas"); };
+  g.addEventListener("click", abrir);
+  g.addEventListener("keydown", e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); abrir(); }});
+});
+
+/* ===== POLÍTICAS ===== */
+let bloqueSel = "etica";
+function pintarPoliticas(){
+  const cont = document.getElementById("bloques");
+  cont.innerHTML = ORDEN_BLOQUES.map(b=>
+    `<button class="bloque-btn" style="--c:${BLOQUES[b].hex}" aria-pressed="${b===bloqueSel}" data-b="${b}">${BLOQUES[b].nombre}${bloqueCompleto(b)?' ✓':''}</button>`).join("");
+  cont.querySelectorAll("button").forEach(b=>b.onclick=()=>{ bloqueSel=b.dataset.b; pintarPoliticas(); });
+
+  const B = BLOQUES[bloqueSel];
+  const lista = POLITICAS.filter(p=>p.bloque===bloqueSel);
+  document.getElementById("contenido-bloque").innerHTML =
+    `<div class="intro-bloque" style="--c:${B.hex}">${ILUS["b_"+bloqueSel]()}<p>${esc(B.intro)}</p></div><div class="limpiar"></div>` +
+    lista.map(p=>{
+      const visto = estado.vistas.includes(p.id);
+      const obj = p.objetivos ? `<h3>${esc(p.objetivosTitulo||"Objetivos")}</h3><div class="objetivos">${p.objetivos.map(o=>`<div class="objetivo">${esc(o)}</div>`).join("")}</div>` : "";
+      return `<details class="ficha" style="--c:${B.hex}" data-id="${p.id}" data-vista="${visto?1:0}">
+        <summary><span class="f-tit">${esc(p.tit)}</span><span class="f-cod">${p.cod} · ${esc(p.ver)}</span><span class="f-est">${visto?'Leída':'Por leer'}</span></summary>
+        <div class="f-cuerpo">
+          <h3>Qué busca</h3><p class="f-busca">${esc(p.busca)}</p>
+          ${obj}
+          <h3>Lo clave</h3><ul>${p.claves.map(c=>`<li>${esc(c)}</li>`).join("")}</ul>
+          <h3>Lo que te corresponde</h3><ul>${p.tuParte.map(c=>`<li>${esc(c)}</li>`).join("")}</ul>
+          <a class="pdf" href="${p.pdf}" target="_blank" rel="noopener">Ver documento oficial (PDF)</a>
+        </div></details>`;
+    }).join("");
+
+  document.querySelectorAll("details.ficha").forEach(d=>{
+    d.addEventListener("toggle", ()=>{
+      if(d.open && !estado.vistas.includes(d.dataset.id)){
+        estado.vistas.push(d.dataset.id); guardar();
+        d.dataset.vista = "1"; d.querySelector(".f-est").textContent = "Leída";
+        actualizarGeneral();
+      }
+    });
+  });
+  const i = ORDEN_BLOQUES.indexOf(bloqueSel);
+  const sig = document.getElementById("btn-sig-bloque");
+  sig.style.display = i < ORDEN_BLOQUES.length-1 ? "" : "none";
+  sig.onclick = ()=>{ bloqueSel = ORDEN_BLOQUES[i+1]; pintarPoliticas(); window.scrollTo({top:0}); };
+}
+
+/* ===== SITUACIONES ===== */
+let jIdx = 0, jAciertos = 0, jEnCurso = false;
+function reiniciarJuego(){ jIdx = 0; jAciertos = 0; jEnCurso = true; }
+function pintarJuego(){
+  const el = document.getElementById("juego");
+  if(!jEnCurso){
+    const r = estado.resultado;
+    el.innerHTML = r
+      ? `<div class="tarjeta"><p style="margin-top:0">Ya resolviste las situaciones: <strong>${r.puntaje} de 10</strong>. Si vuelves a intentarlo, tu nuevo resultado reemplaza al anterior.</p>
+         <div class="acciones"><button class="btn btn-s" id="j-empezar">Intentar de nuevo</button><button class="btn btn-p" data-ir="registro">Registrar participación</button></div></div>`
+      : `<div class="tarjeta"><p style="margin-top:0">Son 10 situaciones. Necesitas 8 correctas para aprobar. Te recomendamos leer primero todas las fichas.</p>
+         <div class="acciones"><button class="btn btn-p" id="j-empezar">Comenzar</button></div></div>`;
+    document.getElementById("j-empezar").onclick = ()=>{ reiniciarJuego(); pintarJuego(); };
+    return;
+  }
+  if(jIdx >= ESCENARIOS.length){
+    jEnCurso = false;
+    estado.resultado = {puntaje:jAciertos, codigo:generarCodigo(jAciertos)}; guardar(); actualizarGeneral();
+    const ap = jAciertos >= MINIMO;
+    el.innerHTML = `<div class="tarjeta">
+      <div class="marcador">${jAciertos} de 10</div>
+      <span class="estado-ap" style="background:${ap?'var(--verde)':'var(--naranja)'}">${ap?'Aprobado':'No aprobado'}</span>
+      <p style="margin-top:12px">${ap ? "Resolviste bien las situaciones. Ahora registra tu participación para que quede constancia." : "Necesitas 8 correctas. Repasa las fichas de las situaciones que fallaste y vuelve a intentarlo; solo cuenta tu último intento."}</p>
+      <div class="acciones">
+        ${ap ? `<button class="btn btn-p" data-ir="registro">Registrar participación</button><button class="btn btn-s" id="j-otra">Intentar de nuevo</button>`
+             : `<button class="btn btn-p" data-ir="politicas">Repasar políticas</button><button class="btn btn-s" id="j-otra">Intentar de nuevo</button><button class="btn btn-s" data-ir="registro">Registrar este resultado</button>`}
+      </div></div>`;
+    document.getElementById("j-otra").onclick = ()=>{ reiniciarJuego(); pintarJuego(); };
+    return;
+  }
+  const s = ESCENARIOS[jIdx]; let respondido = false;
+  el.innerHTML = `<div class="tarjeta">
+    <div class="cuenta"><span>Situación ${jIdx+1} de 10</span><span>Correctas: ${jAciertos}</span></div>
+    <div class="barra-avance"><span style="width:${jIdx*10}%"></span></div>
+    ${ILUS[s.id]()}
+    <span class="lugar">${esc(s.lugar)}</span>
+    <p class="situacion">${esc(s.txt)}</p>
+    <div class="opciones">${s.ops.map(o=>`<button class="opcion" data-o="${o}">${esc(porId[o].tit)}</button>`).join("")}</div>
+    <div id="j-retro"></div></div>`;
+  el.querySelectorAll(".opcion").forEach(b=>b.onclick=()=>{
+    if(respondido) return; respondido = true;
+    const bien = b.dataset.o === s.ok; if(bien) jAciertos++;
+    el.querySelectorAll(".opcion").forEach(x=>{
+      x.disabled = true;
+      if(x.dataset.o===s.ok) x.classList.add("bien");
+      else if(x===b) x.classList.add("mal");
+    });
+    document.getElementById("j-retro").innerHTML = `<div class="retro">
+      <strong>${bien ? "Correcto." : "No es esa. Aplica: " + esc(porId[s.ok].tit) + "."}</strong>
+      ${esc(s.retro)}</div>
+      <div class="acciones"><button class="btn btn-p" id="j-sig">${jIdx < ESCENARIOS.length-1 ? "Siguiente situación" : "Ver resultado"}</button></div>`;
+    const sig = document.getElementById("j-sig"); sig.focus();
+    sig.onclick = ()=>{ jIdx++; pintarJuego(); };
+  });
+}
+
+/* ===== REGISTRO ===== */
+function urlFormulario(r, incrustado){
+  if(PREFILL.base && PREFILL.puntaje && PREFILL.codigo){
+    const sep = PREFILL.base.includes("?") ? "&" : "?";
+    return PREFILL.base + sep + encodeURIComponent(PREFILL.puntaje) + "=" + r.puntaje + "&" + encodeURIComponent(PREFILL.codigo) + "=" + r.codigo + (incrustado ? "&embed=true" : "");
+  }
+  return null;
+}
+function pintarRegistro(){
+  const el = document.getElementById("registro");
+  const r = estado.resultado;
+  if(!r){
+    el.innerHTML = `<div class="aviso"><p style="margin:0">Primero resuelve las 10 situaciones. Con tu resultado podrás registrar la participación.</p></div>
+      <div class="acciones"><button class="btn btn-p" data-ir="practica">Ir a las situaciones</button></div>`;
+    return;
+  }
+  const ap = r.puntaje >= MINIMO;
+  const pre = urlFormulario(r, true), preLink = urlFormulario(r, false);
+  const datos = `<div class="datos-registro"><span>Resultado</span><strong>${r.puntaje} de 10 · ${ap?'Aprobado':'No aprobado'}</strong><span>Código</span><span class="codigo">${r.codigo}</span></div>`;
+  const intro = `<p>Diligencia tus datos y envía el formulario. Así queda constancia de que conociste las políticas internas de Fractal.</p>`;
+  if(pre){
+    el.innerHTML = intro + datos + `<p style="font-size:.9rem">Tu resultado y tu código ya van incluidos en el formulario.</p>
+      <iframe class="marco-form" src="${pre}" title="Registro de participación" loading="lazy" allowfullscreen></iframe>
+      <p style="font-size:.88rem;margin-top:12px">¿No ves el formulario? Ábrelo aquí:</p>
+      <div class="acciones"><a class="btn btn-p" href="${preLink}" target="_blank" rel="noopener">Abrir el registro</a></div>`;
+  } else {
+    el.innerHTML = intro + datos + `<p style="font-size:.9rem">En el formulario escribe tu resultado y el código exactamente como aparecen aquí.</p>
+      <iframe class="marco-form" src="${FORM_EMBED}" title="Registro de participación" loading="lazy" allowfullscreen></iframe>
+      <p style="font-size:.88rem;margin-top:12px">¿No ves el formulario? Ábrelo aquí:</p>
+      <div class="acciones"><a class="btn btn-p" href="${FORM_LINK}" target="_blank" rel="noopener">Abrir el registro</a></div>`;
+  }
+}
+
+function actualizarGeneral(){
+  pintarInicio();
+  document.querySelectorAll(".bloque-btn").forEach(b=>{
+    b.textContent = BLOQUES[b.dataset.b].nombre + (bloqueCompleto(b.dataset.b)?' ✓':'');
+  });
+}
+
+pintarPoliticas();
+actualizarGeneral();
+ir("inicio");
+</script>
+</body>
+</html>
