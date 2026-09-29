@@ -191,7 +191,7 @@ footer{max-width:760px;margin:0 auto;padding:0 16px 32px;font-size:.78rem;color:
 
   <section class="vista" id="v-practica" aria-labelledby="t-practica">
     <h2 id="t-practica">¿Qué política aplica?</h2>
-    <p>Diez situaciones que pueden pasar en la oficina, en el CRV, en la planta de un cliente o en la vía. Elige la política que aplica: cada respuesta queda fija y cuenta para tu resultado.</p>
+    <p>Diez situaciones que pueden pasar en la oficina, en el CRV, en la planta de un cliente o en la vía. Lee qué pasó y elige la política que aplica. Cada respuesta queda fija y cuenta para tu resultado.</p>
     <div id="juego" aria-live="polite"></div>
   </section>
 
@@ -445,36 +445,36 @@ const ILUS = {
 
 /* ===== SITUACIONES (evaluación) ===== */
 const ESCENARIOS = [
- {id:"acoso", lugar:"CRV", txt:"Desde hace semanas, un compañero se burla de otra persona delante de todo el turno, le hace comentarios humillantes y la deja por fuera de las reuniones del equipo a propósito.",
+ {id:"acoso", lugar:"CRV", txt:"Desde hace semanas, un compañero se burla de otra persona frente a todo el turno, le hace comentarios humillantes y la deja por fuera de las reuniones a propósito. Tú lo has visto varias veces y hoy decides reportarlo de forma confidencial.",
   ops:["acoso","asoc","calidad","vial"], ok:"acoso",
-  retro:"La política PT-GE-005, basada en la Ley 1010 de 2006, incluye como posibles conductas de acoso las burlas públicas, las expresiones humillantes y el aislamiento social deliberado. Se puede reportar de forma confidencial por la Línea Ética, juridica@estrategiasfractal.com o el +57 302 201 0702."},
- {id:"vial", lugar:"En la vía", txt:"Vas manejando hacia una visita con un cliente, con una compañera de copiloto. Suena tu celular y es tu jefe.",
+  retro:"Reportarlo es lo que corresponde. La PT-GE-005, basada en la Ley 1010 de 2006, incluye como posibles conductas de acoso las burlas públicas, las expresiones humillantes y el aislamiento social deliberado. Se reporta por la Línea Ética, juridica@estrategiasfractal.com o el +57 302 201 0702, y todos los reportes se tratan con confidencialidad e imparcialidad."},
+ {id:"vial", lugar:"En la vía", txt:"Vas manejando hacia una visita con un cliente, con una compañera de trabajo de copiloto. Suena tu celular, ves que es tu jefe y contestas mientras sigues conduciendo.",
   ops:["calidad","vial","genero","epp"], ok:"vial",
-  retro:"La PT-SST-011 pide no usar el celular ni otros dispositivos mientras se conduce, y exige el cinturón de seguridad tanto al conductor como a los pasajeros."},
- {id:"calidad", lugar:"Oficina", txt:"Antes de enviar un informe a un cliente, revisas lo que pidió y notas que una de sus condiciones no quedó cumplida.",
+  retro:"Contestar mientras conduces incumple la PT-SST-011, que pide abstenerse de usar el celular u otros dispositivos al conducir. La misma política exige el cinturón de seguridad tanto al conductor como a los pasajeros."},
+ {id:"calidad", lugar:"Oficina", txt:"Antes de enviar un informe a un cliente, revisas lo que pidió y notas que una de sus condiciones no quedó cumplida. Como la entrega es hoy, decides enviarlo así.",
   ops:["ambiental","calidad","ddhh","reglamento"], ok:"calidad",
-  retro:"La PT-SGI-003 tiene como objetivo que los servicios cumplan el 100% de los requerimientos del cliente, y promueve la mejora continua en cada acción que realizamos."},
- {id:"epp", lugar:"CRV", txt:"A mitad del turno de clasificación de material, tus guantes de trabajo se rompen.",
+  retro:"Enviarlo así va en contra de la PT-SGI-003, cuyo objetivo es que los servicios cumplan el 100% de los requerimientos del cliente. La política también promueve la mejora continua en cada acción que realizamos."},
+ {id:"epp", lugar:"CRV", txt:"A mitad del turno de clasificación de material, tus guantes de trabajo se rompen. Como falta poco para terminar, sigues trabajando sin ellos y no le avisas a nadie.",
   ops:["ambiental","ddhh","epp","spa"], ok:"epp",
-  retro:"La PT-SST-012 indica que todo EPP deteriorado, extraviado o defectuoso se reporta y se reemplaza sin demora, y que su uso correcto y permanente es obligatorio."},
- {id:"asoc", lugar:"Planta de cliente", txt:"Un operario de Fractal que trabaja en la planta de un cliente quiere afiliarse a un sindicato, pero teme que eso afecte su contrato.",
+  retro:"Seguir sin guantes y no avisar incumple la PT-SST-012: el uso correcto y permanente de los EPP es obligatorio, y todo elemento deteriorado se reporta y se reemplaza sin demora."},
+ {id:"asoc", lugar:"Planta de cliente", txt:"Un operario de Fractal que trabaja en la planta de un cliente quiere afiliarse a un sindicato. Un compañero le dice que primero debe pedir permiso a Fractal o podría perder su contrato, y él decide no afiliarse.",
   ops:["asoc","acoso","calidad","reglamento"], ok:"asoc",
-  retro:"La PT-GE-006 establece que no se necesita autorización previa de Fractal, que afiliarse no condiciona la contratación ni la permanencia y que no habrá represalias. Aplica también a operarios en plantas de clientes cuya vinculación está bajo Fractal."},
- {id:"spa", lugar:"CRV", txt:"El médico te formuló un medicamento que da somnolencia y hoy te corresponde operar equipos.",
+  retro:"El compañero está equivocado. La PT-GE-006 establece que no se necesita autorización previa de Fractal, que afiliarse no condiciona la contratación ni la permanencia y que no habrá represalias. Aplica también a operarios en plantas de clientes cuya vinculación está bajo Fractal."},
+ {id:"spa", lugar:"CRV", txt:"El médico te formuló un medicamento que da somnolencia. Hoy te corresponde operar equipos en el CRV y decides no contarle a nadie para no quedar mal.",
   ops:["genero","calidad","spa","asoc"], ok:"spa",
-  retro:"La PT-SST-013 considera una violación no informar al líder inmediato o al área de SST sobre medicamentos prescritos que puedan afectar el desempeño o la seguridad."},
- {id:"genero", lugar:"Oficina", txt:"En un proceso de selección, alguien sugiere descartar a una candidata porque \"para ese cargo es mejor un hombre\".",
+  retro:"No contarlo incumple la PT-SST-013, que considera una violación omitir la información al líder inmediato o al área de SST sobre medicamentos prescritos que puedan afectar el desempeño o la seguridad."},
+ {id:"genero", lugar:"Oficina", txt:"En un proceso de selección, alguien del equipo propone descartar a una candidata porque \"para ese cargo es mejor un hombre\", y los demás están de acuerdo.",
   ops:["genero","calidad","vial","epp"], ok:"genero",
-  retro:"La PT-GE-008 busca procesos de selección libres de sesgos de género y plantea cero tolerancia a la discriminación, con mecanismos confidenciales para denunciarla."},
- {id:"reglamento", lugar:"CRV", txt:"Una persona recién contratada llega al CRV y pregunta dónde puede consultar las normas básicas de higiene y seguridad, y cuáles son los riesgos de su trabajo.",
+  retro:"Descartarla por esa razón va en contra de la PT-GE-008, que busca procesos de selección libres de sesgos de género y plantea cero tolerancia a la discriminación. La política prevé mecanismos confidenciales para denunciarla."},
+ {id:"reglamento", lugar:"CRV", txt:"Una persona recién contratada en el CRV pregunta dónde puede consultar las normas de higiene y seguridad y cuáles son los riesgos de su trabajo. Su compañero le responde que eso no está escrito en ningún lado y que se aprende con la práctica.",
   ops:["calidad","asoc","reglamento","genero"], ok:"reglamento",
-  retro:"El Reglamento de Higiene y Seguridad Industrial debe estar exhibido en al menos dos lugares visibles de la oficina principal y de los proyectos, y se da a conocer a cada trabajador al ingresar. Allí se listan los riesgos identificados y su control."},
- {id:"ambiental", lugar:"Oficina", txt:"Al cerrar la oficina ves que quedan equipos y luces encendidos, y que el papel reciclable terminó en la caneca de residuos ordinarios.",
+  retro:"La respuesta del compañero no es correcta. El Reglamento de Higiene y Seguridad Industrial lista los riesgos identificados y su control, debe estar exhibido en al menos dos lugares visibles de la oficina principal y de los proyectos, y se da a conocer a cada trabajador al ingresar."},
+ {id:"ambiental", lugar:"Oficina", txt:"Eres la última persona en salir de la oficina. Ves equipos y luces encendidos y papel reciclable en la caneca de residuos ordinarios, pero te vas sin hacer nada porque no es tu puesto.",
   ops:["calidad","ambiental","reglamento","ddhh"], ok:"ambiental",
-  retro:"La PT-SGI-004 incluye entre sus principios la eficiencia energética y la minimización, valorización y aprovechamiento de residuos; entre sus objetivos, potenciar el reciclaje y reducir la generación de residuos."},
- {id:"ddhh", lugar:"Nuevo proyecto", txt:"Fractal va a iniciar una operación en un sector donde vive una comunidad que podría verse afectada.",
+  retro:"Irse sin hacer nada va en contra de la PT-SGI-004, que aplica a todas las personas de Fractal e incluye entre sus principios la eficiencia energética y la minimización, valorización y aprovechamiento de residuos."},
+ {id:"ddhh", lugar:"Nuevo proyecto", txt:"Fractal va a iniciar una operación en un sector donde vive una comunidad que podría verse afectada. Antes de empezar, el equipo analiza los posibles impactos y abre espacios de diálogo con la comunidad.",
   ops:["epp","vial","ddhh","spa"], ok:"ddhh",
-  retro:"La PT-GE-002 compromete a Fractal a analizar los impactos en derechos humanos al inicio de nuevos proyectos y, cuando se afecten comunidades, a promover diálogo, consulta y participación con enfoque diferencial."}
+  retro:"Es lo que corresponde. La PT-GE-002 compromete a Fractal a analizar los impactos en derechos humanos al inicio de nuevos proyectos y, cuando se afecten comunidades, a promover diálogo, consulta y participación con enfoque diferencial."}
 ];
 
 /* ===== ESTADO ===== */
