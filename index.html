@@ -220,8 +220,8 @@ const PREFILL = { base:"https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id
 const MINIMO = 8;
 
 const POLITICAS = [
- {id:"genero", bloque:"etica", cod:"PT-GE-008", tit:"Inclusión de Género y Equidad", ver:"Primera versión · actualizada 01/02/2025",
-  pdf:"https://www.estrategiasfractal.com/_files/ugd/58e45f_1e2b620a9cff4c6cae26f2a90753bcef.pdf",
+ {id:"genero", bloque:"etica", cod:"PT-GE-008", tit:"Política de Inclusión de Género", ver:"Primera versión · actualizada 07/05/2026",
+  pdf:"https://www.estrategiasfractal.com/_files/ugd/58e45f_1e045dc2a73142afbe08dbe7447e73de.pdf",
   busca:"Igualdad de oportunidades, trato justo y un espacio laboral seguro y respetuoso, libre de discriminación por género, identidad de género, orientación sexual, edad, etnia, religión, condición física o cualquier otra característica.",
   claves:["Principios: equidad, respeto, inclusión, no discriminación (cero tolerancia) y transparencia.",
    "Procesos de selección y contratación libres de sesgos de género.",
@@ -263,14 +263,15 @@ const POLITICAS = [
    "Garantizar el mejoramiento continuo, gestionando como mínimo el 95% de las acciones correctivas, preventivas y de mejora.",
    "Identificar y controlar los riesgos, manteniendo la accidentalidad en un índice de frecuencia inferior al 1% mensual."],
   tuParte:["Practicar el autocuidado y la responsabilidad individual y colectiva frente a la seguridad y la salud en el trabajo."]},
- {id:"spa", bloque:"sst", cod:"PT-SST-013", tit:"Prevención del Consumo de Sustancias Psicoactivas", ver:"Primera versión · actualizada 07/05/2026",
-  pdf:"https://www.estrategiasfractal.com/_files/ugd/58e45f_ff94949e5ce247388f795d89fa330317.pdf",
+ {id:"spa", bloque:"sst", cod:"PT-SST-013", tit:"Prevención del Consumo de Tabaco, Alcohol y Sustancias Psicoactivas", ver:"Primera versión · actualizada 07/05/2026",
+  pdf:"https://www.estrategiasfractal.com/_files/ugd/58e45f_928319ac2e33419bb62680baa9124e03.pdf",
   busca:"Prevenir el consumo de alcohol, tabaco y sustancias psicoactivas en el trabajo, y promover hábitos de vida saludables.",
-  claves:["Aplica en instalaciones propias y del cliente, sin importar cargo o modalidad de contratación."],
+  claves:["Aplica a trabajadores, contratistas, proveedores y visitantes que realicen actividades dentro de la empresa o en su representación, sin importar cargo, nivel jerárquico o modalidad de contratación.",
+   "Incluye sensibilización y capacitación para prevenir el consumo, y la intervención de factores de riesgo psicosocial."],
   tuParte:["No presentarte a trabajar bajo los efectos de alcohol, drogas u otras sustancias psicoactivas.",
-   "No consumir alcohol ni sustancias estupefacientes durante la jornada.",
-   "No vender, almacenar ni distribuir alcohol u otras sustancias adictivas en las instalaciones.",
-   "No fumar en áreas no autorizadas por la empresa o el cliente.",
+   "No consumir bebidas alcohólicas ni sustancias estupefacientes o alucinógenas durante la jornada, en instalaciones propias o del cliente.",
+   "No vender, almacenar ni distribuir alcohol u otras sustancias adictivas en las instalaciones de la empresa o del cliente.",
+   "No fumar ni consumir productos de tabaco en áreas no autorizadas por la empresa o el cliente.",
    "Informar al líder inmediato o al área de SST si usas medicamentos prescritos que puedan afectar tu desempeño o tu seguridad."]},
  {id:"reglamento", bloque:"sst", cod:"PG-SST-013", tit:"Reglamento de Higiene y Seguridad Industrial", ver:"Primera versión · actualizada 07/05/2026",
   pdf:"https://www.estrategiasfractal.com/_files/ugd/58e45f_362ffdb75ef241199c146babd391d12b.pdf",
@@ -375,15 +376,17 @@ const ILUS = {
     <rect x="124" y="94" width="14" height="18" rx="2" fill="#fff" stroke="${C.gr}" stroke-width="1.5"/><rect x="144" y="94" width="14" height="18" rx="2" fill="#fff" stroke="${C.gr}" stroke-width="1.5"/>
     ${persona(40,142,C.ah)}${persona(214,142,C.na,C.pi2)}
     <g class="a-latir"><circle cx="150" cy="40" r="18" fill="none" stroke="${C.na}" stroke-width="5"/><line x1="138" y1="52" x2="162" y2="28" stroke="${C.na}" stroke-width="5"/></g>`,"Una botella de licor para compartir dentro de la planta"),
-  amb_crv: ()=>marco(`
-    <rect x="0" y="140" width="320" height="30" fill="#DDE3D3"/>
-    <g transform="translate(30,96)">${[[0,20,C.ah],[18,10,C.vh],[36,24,C.na],[10,0,"#B7B7B7"],[30,4,"#F2C230"],[50,14,C.ah]].map(([x,y,c])=>`<rect x="${x}" y="${y}" width="22" height="20" rx="3" fill="${c}"/>`).join("")}</g>
-    ${persona(140,140,C.ve)}
-    <path class="a-flotar" d="M104 90 h22 l-6 -6 M126 90 l-6 6" stroke="${C.gr}" stroke-width="3" fill="none" stroke-linecap="round"/>
-    ${[[190,"#fff","#8C8C8C"],[232,C.ve,C.ve],[274,"#3F3F3F","#3F3F3F"]].map(([x,t,c],i)=>`<g><rect x="${x-18}" y="96" width="36" height="44" rx="4" fill="${c}"/><rect x="${x-21}" y="90" width="42" height="8" rx="3" fill="${c}" opacity=".85"/><rect x="${x-10}" y="108" width="20" height="10" rx="2" fill="${t}" opacity="${i?'.35':'.9'}"/></g>`).join("")}
-    <g class="a-subir"><rect x="226" y="72" width="12" height="12" rx="2" fill="${C.vh}"/></g>`,"Material mezclado que se clasifica en canecas"),
+  amb_agua: ()=>marco(`
+    <rect x="0" y="142" width="320" height="28" fill="#DDE3D3"/>
+    <rect x="30" y="30" width="110" height="112" fill="#C9D2BC"/>
+    <rect x="60" y="54" width="12" height="20" rx="3" fill="#8C8C8C"/><rect x="54" y="48" width="24" height="8" rx="3" fill="#6E6E6E"/>
+    <path d="M72 64 h30 q14 0 14 14 v6" stroke="#3E7CC0" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <circle class="a-subir" style="animation-direction:reverse" cx="116" cy="104" r="4" fill="#5BA7E6"/><circle class="a-subir d2" style="animation-direction:reverse" cx="112" cy="112" r="3" fill="#5BA7E6"/><circle class="a-subir d3" style="animation-direction:reverse" cx="120" cy="116" r="3" fill="#5BA7E6"/>
+    <ellipse class="a-latir" cx="118" cy="142" rx="34" ry="6" fill="#5BA7E6" opacity=".7"/>
+    <g transform="translate(200,40)"><circle cx="0" cy="0" r="22" fill="#fff" stroke="${C.gr}" stroke-width="3"/><line x1="0" y1="0" x2="0" y2="-14" stroke="${C.gr}" stroke-width="3"/><line class="a-vibrar" x1="0" y1="0" x2="11" y2="0" stroke="${C.na}" stroke-width="3"/></g>
+    <g transform="translate(250,142)"><circle cx="0" cy="-40" r="11" fill="${C.pi2}"/><rect x="-14" y="-27" width="28" height="40" rx="11" fill="${C.ve}"/><rect class="a-flotar" x="-34" y="-24" width="22" height="7" rx="3" fill="${C.ve}"/></g>`,"Una manguera abierta durante la pausa y alguien que va a cerrarla"),
   b_etica: ()=>`<svg class="ilus ilus-bloque" viewBox="0 0 120 90" aria-hidden="true"><rect width="120" height="90" rx="12" fill="#FCE3D9"/>${persona(40,80,C.na,C.pi,.9)}${persona(80,80,C.az,C.pi2,.9)}<path class="a-latir" d="M60 22 c-4 -8 -16 -6 -14 4 c2 6 14 12 14 12 s12 -6 14 -12 c2 -10 -10 -12 -14 -4 Z" fill="${C.na}"/></svg>`,
-  b_sgi: ()=>`<svg class="ilus ilus-bloque" viewBox="0 0 120 90" aria-hidden="true"><rect width="120" height="90" rx="12" fill="#DDF1E0"/><g class="a-flotar"><path d="M60 16 c26 0 34 22 26 44 c-24 4 -40 -8 -40 -26 c0 -8 6 -18 14 -18 Z" fill="${C.ve}"/><path d="M50 62 q10 -18 30 -32" stroke="#fff" stroke-width="3" fill="none"/></g><circle cx="32" cy="64" r="14" fill="${C.az}"/><path d="M25 64 l5 5 l9 -10" stroke="#fff" stroke-width="3" fill="none"/></svg>`,
+  b_sgi: ()=>`<svg class="ilus ilus-bloque" viewBox="0 0 120 90" aria-hidden="true"><rect width="120" height="90" rx="12" fill="#DDF1E0"/><g class="a-flotar"><rect x="20" y="58" width="28" height="22" rx="3" fill="#A8845C"/><rect x="17" y="54" width="34" height="8" rx="3" fill="#8C6B45"/><rect x="32" y="30" width="4" height="26" fill="${C.ve}"/><ellipse cx="24" cy="36" rx="11" ry="6" transform="rotate(-30 24 36)" fill="${C.ve}"/><ellipse cx="44" cy="28" rx="11" ry="6" transform="rotate(30 44 28)" fill="${C.vh}"/><ellipse cx="34" cy="18" rx="6" ry="10" fill="${C.ve}"/></g><g class="a-latir" style="animation-duration:2.6s"><path d="M74 58 l-8 22 l10 -5 l6 9 l4 -22 Z" fill="${C.na}"/><path d="M96 58 l8 22 l-10 -5 l-6 9 l-4 -22 Z" fill="${C.na}"/><circle cx="85" cy="44" r="20" fill="${C.az}"/><circle cx="85" cy="44" r="14" fill="none" stroke="#fff" stroke-width="2"/><path d="M78 44 l5 5 l9 -10" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></g></svg>`,
   b_sst: ()=>`<svg class="ilus ilus-bloque" viewBox="0 0 120 90" aria-hidden="true"><rect width="120" height="90" rx="12" fill="#E1E1EE"/><g class="a-flotar"><path d="M30 52 a30 28 0 0 1 60 0 Z" fill="#F2C230"/><rect x="24" y="50" width="72" height="9" rx="4" fill="#E0AE1A"/><rect x="56" y="22" width="8" height="30" rx="3" fill="#E0AE1A"/></g><path d="M86 62 l14 5 v9 c0 7 -6 11 -14 13 c-8 -2 -14 -6 -14 -13 v-9 Z" fill="${C.az}"/><path d="M80 75 l4 4 l7 -8" stroke="#fff" stroke-width="2.5" fill="none"/></svg>`
 };
 
@@ -401,28 +404,28 @@ const ESCENARIOS = [
  {id:"spa", lugar:"CRV", txt:"El médico te formuló un medicamento que da somnolencia. Hoy te corresponde operar equipos en el CRV y decides no contarle a nadie para no quedar mal.",
   ops:["genero", "calidad", "spa", "ambiental"], ok:"spa",
   retro:"No contarlo incumple la PT-SST-013, que considera una violación omitir la información al líder inmediato o al área de SST sobre medicamentos prescritos que puedan afectar el desempeño o la seguridad."},
- {id:"amb_crv", lugar:"CRV", txt:"Al final del turno llega una carga de material mezclado. Alguien propone mandarla completa como residuo ordinario porque ya es tarde, pero el equipo decide quedarse a clasificarla.",
-  ops:["calidad", "ambiental", "reglamento", "genero"], ok:"ambiental",
-  retro:"El equipo actuó como corresponde. La PT-SGI-004 incluye entre sus principios la minimización, valorización y aprovechamiento de residuos, y entre sus objetivos potenciar el reciclaje, la recuperación y la reutilización."},
+ {id:"amb_agua", lugar:"Planta de cliente", txt:"Durante la pausa del almuerzo, una manguera queda abierta en la zona de lavado de la planta y el agua corre sin que nadie la use. Un compañero la ve y la cierra antes de ir a almorzar.",
+  ops:["calidad","ambiental","reglamento","genero"], ok:"ambiental",
+  retro:"Cerrarla es lo que corresponde. La PT-SGI-004 incluye entre sus principios optimizar el uso de los recursos naturales, y aplica a todas las personas que hacen parte de cualquier proceso de Fractal."},
  {id:"genero", lugar:"Oficina", txt:"En un proceso de selección, alguien del equipo propone descartar a una candidata porque \"para ese cargo es mejor un hombre\", y los demás están de acuerdo.",
   ops:["genero", "calidad", "reglamento", "spa"], ok:"genero",
   retro:"Descartarla por esa razón va en contra de la PT-GE-008, que busca procesos de selección libres de sesgos de género y plantea cero tolerancia a la discriminación. La política prevé mecanismos confidenciales para denunciarla."},
- {id:"reglamento", lugar:"CRV", txt:"Una persona recién contratada en el CRV pregunta dónde puede consultar las normas de higiene y seguridad y cuáles son los riesgos de su trabajo. Su compañero le responde que eso no está escrito en ningún lado y que se aprende con la práctica.",
+ {id:"reglamento", lugar:"CRV", txt:"Una persona recién contratada en el CRV pregunta dónde puede consultar las normas de higiene y seguridad y cuáles son los riesgos de su trabajo.",
   ops:["calidad", "ambiental", "reglamento", "genero"], ok:"reglamento",
-  retro:"La respuesta del compañero no es correcta. El Reglamento de Higiene y Seguridad Industrial lista los riesgos identificados y su control, debe estar exhibido en al menos dos lugares visibles de la oficina principal y de los proyectos, y se da a conocer a cada trabajador al ingresar."},
+  retro:"Esa información está en el Reglamento de Higiene y Seguridad Industrial, que lista los riesgos identificados y su control, debe estar exhibido en al menos dos lugares visibles de la oficina principal y de los proyectos, y se da a conocer a cada trabajador al ingresar."},
  {id:"sst_acciones", lugar:"Oficina", txt:"En la revisión del SG-SST quedan varias acciones correctivas y de mejora pendientes. En lugar de aplazarlas para el próximo año, el equipo acuerda un plan para cerrarlas.",
   ops:["ambiental", "genero", "spa", "sst"], ok:"sst",
   retro:"Es lo que corresponde. Uno de los objetivos del SG-SST 2025-2026, en la PT-SST-010, es garantizar el mejoramiento continuo gestionando como mínimo el 95% de las acciones correctivas, preventivas y de mejora."},
  {id:"spa_licor", lugar:"Planta de cliente", txt:"Al terminar la jornada, un compañero saca una botella de licor para compartir dentro de la planta del cliente antes de salir, y varios aceptan.",
   ops:["spa", "ambiental", "calidad", "genero"], ok:"spa",
-  retro:"Compartir licor dentro de la planta incumple la PT-SST-013, que prohíbe vender, almacenar o distribuir bebidas alcohólicas en las instalaciones, y aplica tanto en instalaciones propias como en las del cliente."},
+  retro:"Compartir licor dentro de la planta incumple la PT-SST-013, que prohíbe vender, almacenar o distribuir alcohol dentro de las instalaciones de la empresa o del cliente."},
  {id:"ambiental", lugar:"Oficina", txt:"Eres la última persona en salir de la oficina. Ves equipos y luces encendidos y papel reciclable en la caneca de residuos ordinarios, pero te vas sin hacer nada porque no es tu puesto.",
   ops:["calidad", "ambiental", "spa", "genero"], ok:"ambiental",
   retro:"Irse sin hacer nada va en contra de la PT-SGI-004, que aplica a todas las personas de Fractal e incluye entre sus principios la eficiencia energética y la minimización, valorización y aprovechamiento de residuos."}
 ];
 
 /* ===== ESTADO ===== */
-const CLAVE = "fractal-politicas-v3";
+const CLAVE = "fractal-politicas-v4";
 let estado = {vistas:[], resultado:null};
 try{ const g = localStorage.getItem(CLAVE); if(g){ estado = Object.assign(estado, JSON.parse(g)); } }catch(e){}
 function guardar(){ try{ localStorage.setItem(CLAVE, JSON.stringify(estado)); }catch(e){} }
