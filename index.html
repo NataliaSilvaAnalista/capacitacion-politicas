@@ -152,10 +152,10 @@ footer{max-width:760px;margin:0 auto;padding:0 16px 32px;font-size:.78rem;color:
     <p>Respeto, cuidado del ambiente, calidad y seguridad: de eso tratan las políticas de Fractal. Conócelas en tres grupos y ponlas a prueba con situaciones reales del trabajo.</p>
 
     <svg class="circulos" viewBox="0 0 340 300" role="group" aria-label="Grupos de políticas">
-      <g class="circulo" tabindex="0" role="button" data-bloque="etica" aria-label="Ética y derechos">
+      <g class="circulo" tabindex="0" role="button" data-bloque="etica" aria-label="Equidad e inclusión">
         <circle cx="120" cy="105" r="88" fill="#E9521D" fill-opacity=".18" stroke="#E9521D" stroke-width="3"/>
-        <text x="86" y="90" text-anchor="middle" fill="#343265">Ética y</text>
-        <text x="86" y="108" text-anchor="middle" fill="#343265">derechos</text>
+        <text x="86" y="90" text-anchor="middle" fill="#343265">Equidad e</text>
+        <text x="86" y="108" text-anchor="middle" fill="#343265">inclusión</text>
       </g>
       <g class="circulo" tabindex="0" role="button" data-bloque="sgi" aria-label="Calidad y ambiente">
         <circle cx="220" cy="105" r="88" fill="#2AA539" fill-opacity=".18" stroke="#2AA539" stroke-width="3"/>
@@ -180,7 +180,7 @@ footer{max-width:760px;margin:0 auto;padding:0 16px 32px;font-size:.78rem;color:
 
   <section class="vista" id="v-politicas" aria-labelledby="t-politicas">
     <h2 id="t-politicas">Las políticas</h2>
-    <p>Abre cada ficha para leerla. Al final de cada una está el documento oficial completo.</p>
+    <p>Son cinco políticas y el Reglamento de Higiene y Seguridad Industrial. Abre cada ficha para leerla. Al final de cada una está el documento oficial completo.</p>
     <div class="bloques" role="group" aria-label="Elegir grupo" id="bloques"></div>
     <div id="contenido-bloque"></div>
     <div class="acciones">
@@ -191,7 +191,7 @@ footer{max-width:760px;margin:0 auto;padding:0 16px 32px;font-size:.78rem;color:
 
   <section class="vista" id="v-practica" aria-labelledby="t-practica">
     <h2 id="t-practica">¿Qué política aplica?</h2>
-    <p>Diez situaciones que pueden pasar en la oficina, en el CRV, en la planta de un cliente o en la vía. Lee qué pasó y elige la política que aplica. Cada respuesta queda fija y cuenta para tu resultado.</p>
+    <p>Diez situaciones que pueden pasar en la oficina, en el CRV o en la planta de un cliente. Lee qué pasó y elige la política que aplica. Cada respuesta queda fija y cuenta para tu resultado.</p>
     <div id="juego" aria-live="polite"></div>
   </section>
 
@@ -220,32 +220,6 @@ const PREFILL = { base:"https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id
 const MINIMO = 8;
 
 const POLITICAS = [
- {id:"ddhh", bloque:"etica", cod:"PT-GE-002", tit:"Política de Derechos Humanos", ver:"Primera versión · actualizada 13/11/2025",
-  pdf:"https://www.estrategiasfractal.com/_files/ugd/58e45f_43601a1996e24e2cb0fbe9b0e224bf1d.pdf",
-  busca:"Fractal se compromete a respetar los derechos humanos, prevenir impactos adversos, mitigar los que se presenten y remediar cuando corresponda.",
-  claves:["Aplica a colaboradores directos, contratistas, subcontratistas y proveedores cuando actúan en nombre de Fractal, y a las comunidades vinculadas a sus operaciones.",
-   "Se basa en los Principios Rectores de Naciones Unidas sobre Empresas y Derechos Humanos, los Convenios Fundamentales de la OIT y la Constitución Política de Colombia, entre otros.",
-   "Principios: dignidad humana, no discriminación, trabajo decente, respeto a las comunidades, ambiente sano, debida diligencia, remediación, transparencia y mejora continua.",
-   "Antes de nuevos proyectos u operaciones significativas se analizan los posibles impactos en derechos humanos."],
-  tuParte:["Su cumplimiento es obligatorio para todos en Fractal; el incumplimiento puede dar lugar a medidas disciplinarias, contractuales o legales.",
-   "Puedes presentar inquietudes o denuncias por canales confidenciales. Fractal garantiza la no represalia a quien los use de buena fe."]},
- {id:"acoso", bloque:"etica", cod:"PT-GE-005", tit:"Prevención del Acoso Laboral y Sexual", ver:"Revisión del 15 de enero de 2025",
-  pdf:"https://www.estrategiasfractal.com/_files/ugd/58e45f_76553d431b254090b0e667dd96df3b6a.pdf",
-  busca:"Un entorno laboral seguro, incluyente y respetuoso. Fractal rechaza cualquier forma de acoso laboral, acoso sexual, hostigamiento o violencia en el trabajo.",
-  claves:["Se basa en la Ley 1010 de 2006.",
-   "Son ejemplos de posible acoso: agresiones físicas, verbales o psicológicas; expresiones humillantes o discriminatorias; burlas públicas; amenazas de despido injustificadas; jornadas excesivas sin sustento; mensajes ofensivos o anónimos y el aislamiento social deliberado.",
-   "Fractal trabaja en sensibilización, espacios de diálogo y bienestar, incluida la desconexión laboral como derecho."],
-  tuParte:["Reporta de forma confidencial cualquier conducta que pueda ser acoso por la Línea Ética (estrategiasfractal.com/lineaeticafractal), el correo juridica@estrategiasfractal.com o el +57 302 201 0702.",
-   "Incumplir esta política es falta grave según el Reglamento Interno de Trabajo y el Código Sustantivo del Trabajo."]},
- {id:"asoc", bloque:"etica", cod:"PT-GE-006", tit:"Política de Derecho a la Asociación", ver:"Primera versión · actualizada 13/11/2025",
-  pdf:"https://www.estrategiasfractal.com/_files/ugd/58e45f_57891d06374b4884b4c52cb5528f3249.pdf",
-  busca:"Garantizar que quienes trabajan con Fractal puedan asociarse libremente para defender sus intereses, conforme a la legislación colombiana.",
-  claves:["Puedes constituir o afiliarte a asociaciones o sindicatos sin autorización previa de Fractal.",
-   "Pertenecer o no a una asociación no condiciona la contratación, la permanencia ni el acceso a beneficios, y no habrá represalias por ello.",
-   "Fractal reconoce el fuero sindical según la normativa laboral.",
-   "Aplica también a los operarios de Fractal ubicados en plantas de clientes, cuando su vinculación está bajo Fractal."],
-  tuParte:["Quienes participan en asociaciones deben actuar con respeto, responsabilidad, transparencia y buena fe en el diálogo.",
-   "La política indica que todos los trabajadores deben firmar acuse de recibo como parte de su vinculación."]},
  {id:"genero", bloque:"etica", cod:"PT-GE-008", tit:"Inclusión de Género y Equidad", ver:"Primera versión · actualizada 01/02/2025",
   pdf:"https://www.estrategiasfractal.com/_files/ugd/58e45f_1e2b620a9cff4c6cae26f2a90753bcef.pdf",
   busca:"Igualdad de oportunidades, trato justo y un espacio laboral seguro y respetuoso, libre de discriminación por género, identidad de género, orientación sexual, edad, etnia, religión, condición física o cualquier otra característica.",
@@ -289,26 +263,6 @@ const POLITICAS = [
    "Garantizar el mejoramiento continuo, gestionando como mínimo el 95% de las acciones correctivas, preventivas y de mejora.",
    "Identificar y controlar los riesgos, manteniendo la accidentalidad en un índice de frecuencia inferior al 1% mensual."],
   tuParte:["Practicar el autocuidado y la responsabilidad individual y colectiva frente a la seguridad y la salud en el trabajo."]},
- {id:"vial", bloque:"sst", cod:"PT-SST-011", tit:"Política de Seguridad Vial", ver:"Primera versión · actualizada 07/05/2026",
-  pdf:"https://www.estrategiasfractal.com/_files/ugd/58e45f_945fa3e841e5489abcecd57ee8414b8b.pdf",
-  busca:"Prevenir accidentes de tránsito y proteger la vida de todos los actores viales en las operaciones de Fractal.",
-  claves:["Aplica a conductores, acompañantes y peatones vinculados a las operaciones, dentro o fuera de la organización."],
-  tuParte:["Participar en campañas, capacitaciones y actividades de seguridad vial.",
-   "Hacer inspecciones preventivas a vehículos, rutas internas y zonas peatonales.",
-   "Cumplir el Código Nacional de Tránsito y las normas internas, y respetar los límites de velocidad.",
-   "No usar el celular ni otros dispositivos mientras conduces.",
-   "Usar siempre el cinturón de seguridad, tanto conductores como pasajeros.",
-   "Cumplir la política sobre consumo de sustancias psicoactivas.",
-   "Informar a tiempo cualquier condición de salud que pueda afectar la conducción segura."]},
- {id:"epp", bloque:"sst", cod:"PT-SST-012", tit:"Uso de Elementos de Protección Personal", ver:"Primera versión · actualizada 07/05/2026",
-  pdf:"https://www.estrategiasfractal.com/_files/ugd/58e45f_991f07f5b5a043eba3275ef09af51d9d.pdf",
-  busca:"Proteger la salud y la integridad de los colaboradores con EPP certificados, adecuados a los riesgos de cada labor.",
-  claves:["Los EPP no eliminan los riesgos ni previenen por sí solos los accidentes, pero minimizan la severidad de posibles lesiones.",
-   "Hacen parte de un control integral que prioriza eliminar y mitigar los riesgos en la fuente y en el medio."],
-  tuParte:["Usar de manera correcta y permanente los EPP asignados: es obligatorio.",
-   "Mantenerlos en buen estado, limpios y bien guardados.",
-   "Reportar de inmediato pérdida, mal uso, deterioro o mal funcionamiento, para que se reemplacen sin demora.",
-   "Participar en la formación sobre uso, mantenimiento y almacenamiento."]},
  {id:"spa", bloque:"sst", cod:"PT-SST-013", tit:"Prevención del Consumo de Sustancias Psicoactivas", ver:"Primera versión · actualizada 07/05/2026",
   pdf:"https://www.estrategiasfractal.com/_files/ugd/58e45f_ff94949e5ce247388f795d89fa330317.pdf",
   busca:"Prevenir el consumo de alcohol, tabaco y sustancias psicoactivas en el trabajo, y promover hábitos de vida saludables.",
@@ -331,8 +285,8 @@ const POLITICAS = [
 
 
 const BLOQUES = {
-  etica:{nombre:"Ética y derechos", hex:"#E9521D",
-    intro:"Cómo nos tratamos entre nosotros y con las personas que se relacionan con Fractal."},
+  etica:{nombre:"Equidad e inclusión", hex:"#E9521D",
+    intro:"Igualdad de oportunidades y trato justo para todas las personas que trabajan con Fractal."},
   sgi:{nombre:"Calidad y ambiente", hex:"#2AA539",
     intro:"Los compromisos del Sistema de Gestión Integrado con los clientes y con el ambiente."},
   sst:{nombre:"Seguridad y salud", hex:"#343265",
@@ -350,48 +304,6 @@ function marco(contenido, alt){
   return `<svg class="ilus" viewBox="0 0 320 170" role="img" aria-label="${alt}"><rect width="320" height="170" rx="14" fill="${C.fo}"/>${contenido}</svg>`;
 }
 const ILUS = {
-  acoso: ()=>marco(`
-    <rect x="0" y="140" width="320" height="30" fill="#DDE3D3"/>
-    <rect x="20" y="92" width="44" height="48" rx="4" fill="#C9D2BC"/><rect x="26" y="70" width="36" height="24" rx="4" fill="#D5DCC8"/>
-    ${persona(95,140,C.na)}${persona(128,140,C.ah,C.pi2)}${persona(161,140,C.ve)}
-    <g class="a-latir"><rect x="96" y="44" width="46" height="22" rx="11" fill="#fff"/><text x="119" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="${C.na}">jaja</text></g>
-    <g class="a-latir" style="animation-delay:.6s"><rect x="146" y="30" width="46" height="22" rx="11" fill="#fff"/><text x="169" y="46" text-anchor="middle" font-size="12" font-weight="700" fill="${C.na}">jaja</text></g>
-    <line x1="195" y1="118" x2="235" y2="118" stroke="${C.gr}" stroke-width="2" stroke-dasharray="4 5" opacity=".5"/>
-    ${persona(262,140,"#8C8FA3")}
-    <circle class="a-parpadeo" cx="262" cy="80" r="3" fill="${C.gr}"/>`,"Un grupo se burla de una persona que queda aislada"),
-  vial: ()=>marco(`
-    <rect x="0" y="104" width="320" height="50" fill="#5E6070"/>
-    <g class="a-correr"><g fill="#fff">${[0,1,2,3,4,5,6,7,8].map(i=>`<rect x="${i*40}" y="127" width="22" height="4" rx="2"/>`).join("")}</g></g>
-    <g class="a-flotar" style="animation-duration:.9s">
-      <rect x="92" y="84" width="120" height="34" rx="10" fill="${C.az}"/>
-      <path d="M116 84 L130 62 L180 62 L196 84 Z" fill="${C.az}"/>
-      <path d="M124 82 L134 67 L154 67 L154 82 Z M158 82 L158 67 L176 67 L188 82 Z" fill="#BFD4F2"/>
-      <circle cx="120" cy="120" r="11" fill="${C.gr}"/><circle cx="186" cy="120" r="11" fill="${C.gr}"/>
-      <circle cx="120" cy="120" r="4" fill="#ccc"/><circle cx="186" cy="120" r="4" fill="#ccc"/>
-    </g>
-    <g transform="translate(236,26)"><g class="a-vibrar"><rect x="0" y="0" width="26" height="44" rx="5" fill="${C.gr}"/><rect x="3" y="5" width="20" height="30" rx="2" fill="${C.vh}"/></g>
-    <path class="a-parpadeo" d="M-8 10 q-6 12 0 24 M34 10 q6 12 0 24" stroke="${C.na}" stroke-width="3" fill="none" stroke-linecap="round"/></g>`,"Un vehículo en la vía y un celular que suena"),
-  epp: ()=>marco(`
-    <rect x="0" y="118" width="320" height="16" fill="${C.gr}"/><circle cx="12" cy="126" r="8" fill="#777"/><circle cx="308" cy="126" r="8" fill="#777"/>
-    <g class="a-cinta"><rect x="-60" y="100" width="26" height="18" rx="3" fill="${C.ah}"/><rect x="10" y="96" width="20" height="22" rx="3" fill="${C.vh}"/><rect x="80" y="104" width="30" height="14" rx="3" fill="${C.na}"/><rect x="150" y="98" width="22" height="20" rx="3" fill="${C.ah}"/><rect x="220" y="102" width="28" height="16" rx="3" fill="${C.vh}"/></g>
-    <g transform="translate(150,14)">
-      <rect x="0" y="30" width="60" height="52" rx="14" fill="${C.ve}"/>
-      ${[0,1,2,3].map(i=>`<rect x="${2+i*15}" y="0" width="12" height="40" rx="6" fill="${C.ve}"/>`).join("")}
-      <rect x="-14" y="46" width="22" height="12" rx="6" fill="${C.ve}" transform="rotate(-30 -3 52)"/>
-      <path d="M22 36 l8 8 l-6 6 l9 9 l-5 7" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <rect x="4" y="82" width="52" height="14" rx="3" fill="#1F7E2C"/>
-    </g>
-    <g class="a-latir"><circle cx="248" cy="40" r="16" fill="${C.na}"/><text x="248" y="47" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">!</text></g>`,"Un guante de trabajo roto sobre la banda de clasificación"),
-  asoc: ()=>marco(`
-    <rect x="0" y="142" width="320" height="28" fill="#DDE3D3"/>
-    <path d="M18 142 V78 l34 -18 v18 l34 -18 v18 l34 -18 V142 Z" fill="#C9D2BC"/>
-    <rect x="100" y="36" width="14" height="42" fill="#B7C1A8"/>
-    <circle class="a-subir" cx="107" cy="30" r="7" fill="#D0D5DA"/><circle class="a-subir d2" cx="110" cy="30" r="6" fill="#D0D5DA"/><circle class="a-subir d3" cx="104" cy="30" r="5" fill="#D0D5DA"/>
-    <rect x="30" y="100" width="18" height="18" fill="#fff" opacity=".6"/><rect x="64" y="100" width="18" height="18" fill="#fff" opacity=".6"/>
-    ${persona(190,142,C.ah)}${persona(258,142,C.na,C.pi2)}
-    <g class="a-flotar"><rect x="160" y="40" width="62" height="34" rx="12" fill="#fff"/>
-      <circle cx="178" cy="57" r="5" fill="${C.az}"/><circle cx="191" cy="57" r="5" fill="${C.ve}"/><circle cx="204" cy="57" r="5" fill="${C.na}"/></g>
-    <text class="a-latir" x="258" y="80" text-anchor="middle" font-size="26" font-weight="800" fill="${C.az}">?</text>`,"Un operario en la planta de un cliente piensa en asociarse"),
   spa: ()=>marco(`
     <rect x="0" y="142" width="320" height="28" fill="#DDE3D3"/>
     <rect x="176" y="60" width="118" height="82" rx="8" fill="${C.ah}"/><rect x="188" y="72" width="54" height="30" rx="4" fill="#BFD4F2"/>
@@ -417,14 +329,6 @@ const ILUS = {
     <polygon class="a-parpadeo" points="150,74 186,112 128,112" fill="#F4E27A" opacity=".25"/>
     <rect x="232" y="100" width="36" height="42" rx="4" fill="#8A8A8A"/><rect x="228" y="96" width="44" height="8" rx="3" fill="#6E6E6E"/>
     <g class="a-flotar"><rect x="238" y="78" width="24" height="18" fill="#fff" transform="rotate(-12 250 87)"/></g>`,"Oficina de noche con equipos y luces encendidos y papel en la caneca equivocada"),
-  ddhh: ()=>marco(`
-    <rect x="0" y="136" width="320" height="34" fill="#DDE3D3"/>
-    ${[0,1,2].map(i=>`<g transform="translate(${22+i*52},92)"><rect width="42" height="44" fill="${[C.vh,"#E8C36A",C.ah][i]}"/><path d="M-4 2 L21 -18 L46 2 Z" fill="${[C.ve,C.na,C.az][i]}"/><rect x="15" y="22" width="12" height="22" fill="#fff" opacity=".7"/></g>`).join("")}
-    ${persona(96,136,C.na,C.pi2,.8)}
-    <rect x="214" y="44" width="8" height="92" fill="${C.na}"/><rect x="214" y="44" width="70" height="8" fill="${C.na}"/><line x1="276" y1="52" x2="276" y2="86" stroke="${C.gr}" stroke-width="2"/>
-    <rect class="a-flotar" x="266" y="86" width="20" height="14" fill="${C.ah}"/>
-    <path d="M240 136 l8 -20 l8 20 Z" fill="${C.na}"/><path d="M262 136 l8 -20 l8 20 Z" fill="${C.na}"/>
-    <path class="a-flotar" d="M170 34 q6 -6 12 0 q6 -6 12 0" stroke="${C.gr}" stroke-width="2" fill="none"/>`,"Un nuevo proyecto cerca de las casas de una comunidad"),
   calidad: ()=>marco(`
     <rect x="96" y="14" width="128" height="146" rx="8" fill="#fff"/><rect x="96" y="14" width="128" height="24" rx="8" fill="${C.ve}"/>
     <text x="160" y="31" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">Requerimientos</text>
@@ -438,6 +342,46 @@ const ILUS = {
     <circle class="a-rebote" cx="119" cy="36" r="5" fill="${C.na}"/>
     <g transform="translate(250,142)"><circle cx="0" cy="-40" r="11" fill="${C.pi}"/><path d="M-14 -44 a14 13 0 0 1 28 0 Z" fill="#F2C230"/><rect x="-16" y="-45" width="32" height="4" rx="2" fill="#E0AE1A"/><rect x="-14" y="-27" width="28" height="40" rx="11" fill="${C.ah}"/></g>
     <text class="a-latir" x="226" y="70" font-size="24" font-weight="800" fill="${C.az}">?</text>`,"Un colaborador nuevo frente al reglamento publicado"),
+  genero_tareas: ()=>marco(`
+    <rect x="0" y="140" width="320" height="30" fill="#DDE3D3"/>
+    <rect x="176" y="24" width="120" height="74" rx="6" fill="#fff" stroke="#C9D2BC" stroke-width="3"/>
+    <rect class="a-latir" x="192" y="70" width="14" height="18" fill="${C.ve}"/><rect class="a-latir" style="animation-delay:.3s" x="214" y="56" width="14" height="32" fill="${C.ah}"/><rect class="a-latir" style="animation-delay:.6s" x="236" y="44" width="14" height="44" fill="${C.na}"/>
+    ${persona(214,140,C.az)}${persona(262,140,C.ah,C.pi2)}
+    <rect x="34" y="92" width="28" height="24" rx="8" fill="#6B4A2F"/><circle cx="48" cy="98" r="14" fill="#6B4A2F"/>${persona(48,140,C.na)}
+    <rect x="96" y="92" width="28" height="24" rx="8" fill="#2E2A26"/><circle cx="110" cy="98" r="14" fill="#2E2A26"/>${persona(110,140,C.vh,C.pi2)}
+    <g class="a-flotar"><rect x="64" y="96" width="16" height="16" rx="2" fill="#fff" stroke="${C.gr}" stroke-width="1.5"/><rect x="126" y="96" width="16" height="16" rx="2" fill="#fff" stroke="${C.gr}" stroke-width="1.5"/></g>
+    <rect x="22" y="112" width="130" height="10" rx="4" fill="#8C7B6B"/>`,"En una reunión, las mujeres toman notas y los hombres presentan"),
+  sst_visita: ()=>marco(`
+    <rect x="0" y="140" width="320" height="30" fill="#DDE3D3"/>
+    <rect x="150" y="30" width="150" height="110" fill="#C9D2BC"/><rect x="178" y="64" width="80" height="76" fill="#8C8FA3"/>
+    <g>${[0,1,2,3,4,5,6].map(i=>`<rect x="${150+i*22}" y="30" width="11" height="12" fill="${i%2?'#F2C230':C.gr}"/>`).join("")}</g>
+    <rect x="164" y="48" width="108" height="12" rx="3" fill="#fff"/><text x="218" y="58" text-anchor="middle" font-size="9" font-weight="700" fill="${C.az}">ZONA DE OPERACIÓN</text>
+    ${persona(84,140,"#8C8FA3")}<rect x="76" y="118" width="16" height="10" rx="2" fill="#fff"/>
+    <g transform="translate(140,140)"><circle cx="0" cy="-40" r="11" fill="${C.pi2}"/><path d="M-14 -44 a14 13 0 0 1 28 0 Z" fill="#F2C230"/><rect x="-14" y="-27" width="28" height="40" rx="11" fill="${C.ve}"/></g>
+    <path class="a-flotar" d="M104 96 h18 l-6 -6 M122 96 l-6 6" stroke="${C.gr}" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <g class="a-latir"><path d="M84 40 l16 28 h-32 Z" fill="${C.na}"/><text x="84" y="63" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">!</text></g>`,"Un visitante entra a la zona de operación sin indicaciones de seguridad"),
+  sst_acciones: ()=>marco(`
+    <rect x="30" y="20" width="260" height="132" rx="8" fill="#fff"/>
+    <text x="46" y="42" font-size="11" font-weight="700" fill="${C.az}">Acciones SG-SST</text>
+    ${[0,1,2,3].map(i=>`<g transform="translate(46,${54+i*20})"><rect width="12" height="12" rx="2" fill="${C.ve}"/><path d="M2 6 l3 3 l5 -6" stroke="#fff" stroke-width="2" fill="none"/><rect x="20" y="3" width="${[120,96,132,84][i]}" height="6" rx="3" fill="#D5D8DE"/></g>`).join("")}
+    <rect x="46" y="136" width="228" height="8" rx="4" fill="#E4E7EC"/>
+    <rect x="46" y="136" width="216" height="8" rx="4" fill="${C.ve}" class="a-parpadeo" style="animation-duration:2.4s"/>
+    <g class="a-rebote"><circle cx="250" cy="72" r="22" fill="${C.az}"/><text x="250" y="78" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">95%</text></g>`,"Un tablero de acciones del SG-SST casi completo"),
+  spa_licor: ()=>marco(`
+    <rect x="0" y="142" width="320" height="28" fill="#DDE3D3"/>
+    <path d="M190 142 V78 l34 -18 v18 l34 -18 v18 l34 -18 V142 Z" fill="#C9D2BC"/>
+    <rect x="70" y="112" width="96" height="30" rx="3" fill="#A8845C"/>
+    <g class="a-vibrar" style="animation-duration:2.4s"><rect x="92" y="62" width="22" height="50" rx="6" fill="#6E3B1E"/><rect x="97" y="46" width="12" height="18" rx="3" fill="#6E3B1E"/><rect x="95" y="80" width="16" height="16" rx="2" fill="#F2C230"/></g>
+    <rect x="124" y="94" width="14" height="18" rx="2" fill="#fff" stroke="${C.gr}" stroke-width="1.5"/><rect x="144" y="94" width="14" height="18" rx="2" fill="#fff" stroke="${C.gr}" stroke-width="1.5"/>
+    ${persona(40,142,C.ah)}${persona(214,142,C.na,C.pi2)}
+    <g class="a-latir"><circle cx="150" cy="40" r="18" fill="none" stroke="${C.na}" stroke-width="5"/><line x1="138" y1="52" x2="162" y2="28" stroke="${C.na}" stroke-width="5"/></g>`,"Una botella de licor para compartir dentro de la planta"),
+  amb_crv: ()=>marco(`
+    <rect x="0" y="140" width="320" height="30" fill="#DDE3D3"/>
+    <g transform="translate(30,96)">${[[0,20,C.ah],[18,10,C.vh],[36,24,C.na],[10,0,"#B7B7B7"],[30,4,"#F2C230"],[50,14,C.ah]].map(([x,y,c])=>`<rect x="${x}" y="${y}" width="22" height="20" rx="3" fill="${c}"/>`).join("")}</g>
+    ${persona(140,140,C.ve)}
+    <path class="a-flotar" d="M104 90 h22 l-6 -6 M126 90 l-6 6" stroke="${C.gr}" stroke-width="3" fill="none" stroke-linecap="round"/>
+    ${[[190,"#fff","#8C8C8C"],[232,C.ve,C.ve],[274,"#3F3F3F","#3F3F3F"]].map(([x,t,c],i)=>`<g><rect x="${x-18}" y="96" width="36" height="44" rx="4" fill="${c}"/><rect x="${x-21}" y="90" width="42" height="8" rx="3" fill="${c}" opacity=".85"/><rect x="${x-10}" y="108" width="20" height="10" rx="2" fill="${t}" opacity="${i?'.35':'.9'}"/></g>`).join("")}
+    <g class="a-subir"><rect x="226" y="72" width="12" height="12" rx="2" fill="${C.vh}"/></g>`,"Material mezclado que se clasifica en canecas"),
   b_etica: ()=>`<svg class="ilus ilus-bloque" viewBox="0 0 120 90" aria-hidden="true"><rect width="120" height="90" rx="12" fill="#FCE3D9"/>${persona(40,80,C.na,C.pi,.9)}${persona(80,80,C.az,C.pi2,.9)}<path class="a-latir" d="M60 22 c-4 -8 -16 -6 -14 4 c2 6 14 12 14 12 s12 -6 14 -12 c2 -10 -10 -12 -14 -4 Z" fill="${C.na}"/></svg>`,
   b_sgi: ()=>`<svg class="ilus ilus-bloque" viewBox="0 0 120 90" aria-hidden="true"><rect width="120" height="90" rx="12" fill="#DDF1E0"/><g class="a-flotar"><path d="M60 16 c26 0 34 22 26 44 c-24 4 -40 -8 -40 -26 c0 -8 6 -18 14 -18 Z" fill="${C.ve}"/><path d="M50 62 q10 -18 30 -32" stroke="#fff" stroke-width="3" fill="none"/></g><circle cx="32" cy="64" r="14" fill="${C.az}"/><path d="M25 64 l5 5 l9 -10" stroke="#fff" stroke-width="3" fill="none"/></svg>`,
   b_sst: ()=>`<svg class="ilus ilus-bloque" viewBox="0 0 120 90" aria-hidden="true"><rect width="120" height="90" rx="12" fill="#E1E1EE"/><g class="a-flotar"><path d="M30 52 a30 28 0 0 1 60 0 Z" fill="#F2C230"/><rect x="24" y="50" width="72" height="9" rx="4" fill="#E0AE1A"/><rect x="56" y="22" width="8" height="30" rx="3" fill="#E0AE1A"/></g><path d="M86 62 l14 5 v9 c0 7 -6 11 -14 13 c-8 -2 -14 -6 -14 -13 v-9 Z" fill="${C.az}"/><path d="M80 75 l4 4 l7 -8" stroke="#fff" stroke-width="2.5" fill="none"/></svg>`
@@ -445,40 +389,40 @@ const ILUS = {
 
 /* ===== SITUACIONES (evaluación) ===== */
 const ESCENARIOS = [
- {id:"acoso", lugar:"CRV", txt:"Desde hace semanas, un compañero se burla de otra persona frente a todo el turno, le hace comentarios humillantes y la deja por fuera de las reuniones a propósito. Tú lo has visto varias veces y hoy decides reportarlo de forma confidencial.",
-  ops:["acoso","asoc","calidad","vial"], ok:"acoso",
-  retro:"Reportarlo es lo que corresponde. La PT-GE-005, basada en la Ley 1010 de 2006, incluye como posibles conductas de acoso las burlas públicas, las expresiones humillantes y el aislamiento social deliberado. Se reporta por la Línea Ética, juridica@estrategiasfractal.com o el +57 302 201 0702, y todos los reportes se tratan con confidencialidad e imparcialidad."},
- {id:"vial", lugar:"En la vía", txt:"Vas manejando hacia una visita con un cliente, con una compañera de trabajo de copiloto. Suena tu celular, ves que es tu jefe y contestas mientras sigues conduciendo.",
-  ops:["calidad","vial","genero","epp"], ok:"vial",
-  retro:"Contestar mientras conduces incumple la PT-SST-011, que pide abstenerse de usar el celular u otros dispositivos al conducir. La misma política exige el cinturón de seguridad tanto al conductor como a los pasajeros."},
+ {id:"genero_tareas", lugar:"Oficina", txt:"En las reuniones de un equipo, el líder siempre asigna a las mujeres tomar notas y organizar la logística, mientras que a los hombres les asigna las presentaciones con el cliente.",
+  ops:["genero", "calidad", "ambiental", "spa"], ok:"genero",
+  retro:"Repartir así las tareas va en contra de la PT-GE-008, que promueve la igualdad de oportunidades y el trato justo, y plantea cero tolerancia a la discriminación por género."},
+ {id:"sst_visita", lugar:"CRV", txt:"Llega un proveedor al CRV y pide entrar a la zona de operación. Tu compañero lo deja pasar sin darle ninguna indicación de seguridad porque \"solo va a estar un momento\".",
+  ops:["calidad", "sst", "genero", "ambiental"], ok:"sst",
+  retro:"Dejarlo pasar así incumple la PT-SST-010. La política aplica también a proveedores, contratistas y visitantes, y compromete a Fractal a exigirles el cumplimiento de los estándares de trabajo seguro."},
  {id:"calidad", lugar:"Oficina", txt:"Antes de enviar un informe a un cliente, revisas lo que pidió y notas que una de sus condiciones no quedó cumplida. Como la entrega es hoy, decides enviarlo así.",
-  ops:["ambiental","calidad","ddhh","reglamento"], ok:"calidad",
+  ops:["ambiental", "calidad", "genero", "reglamento"], ok:"calidad",
   retro:"Enviarlo así va en contra de la PT-SGI-003, cuyo objetivo es que los servicios cumplan el 100% de los requerimientos del cliente. La política también promueve la mejora continua en cada acción que realizamos."},
- {id:"epp", lugar:"CRV", txt:"A mitad del turno de clasificación de material, tus guantes de trabajo se rompen. Como falta poco para terminar, sigues trabajando sin ellos y no le avisas a nadie.",
-  ops:["ambiental","ddhh","epp","spa"], ok:"epp",
-  retro:"Seguir sin guantes y no avisar incumple la PT-SST-012: el uso correcto y permanente de los EPP es obligatorio, y todo elemento deteriorado se reporta y se reemplaza sin demora."},
- {id:"asoc", lugar:"Planta de cliente", txt:"Un operario de Fractal que trabaja en la planta de un cliente quiere afiliarse a un sindicato. Un compañero le dice que primero debe pedir permiso a Fractal o podría perder su contrato, y él decide no afiliarse.",
-  ops:["asoc","acoso","calidad","reglamento"], ok:"asoc",
-  retro:"El compañero está equivocado. La PT-GE-006 establece que no se necesita autorización previa de Fractal, que afiliarse no condiciona la contratación ni la permanencia y que no habrá represalias. Aplica también a operarios en plantas de clientes cuya vinculación está bajo Fractal."},
  {id:"spa", lugar:"CRV", txt:"El médico te formuló un medicamento que da somnolencia. Hoy te corresponde operar equipos en el CRV y decides no contarle a nadie para no quedar mal.",
-  ops:["genero","calidad","spa","asoc"], ok:"spa",
+  ops:["genero", "calidad", "spa", "ambiental"], ok:"spa",
   retro:"No contarlo incumple la PT-SST-013, que considera una violación omitir la información al líder inmediato o al área de SST sobre medicamentos prescritos que puedan afectar el desempeño o la seguridad."},
+ {id:"amb_crv", lugar:"CRV", txt:"Al final del turno llega una carga de material mezclado. Alguien propone mandarla completa como residuo ordinario porque ya es tarde, pero el equipo decide quedarse a clasificarla.",
+  ops:["calidad", "ambiental", "reglamento", "genero"], ok:"ambiental",
+  retro:"El equipo actuó como corresponde. La PT-SGI-004 incluye entre sus principios la minimización, valorización y aprovechamiento de residuos, y entre sus objetivos potenciar el reciclaje, la recuperación y la reutilización."},
  {id:"genero", lugar:"Oficina", txt:"En un proceso de selección, alguien del equipo propone descartar a una candidata porque \"para ese cargo es mejor un hombre\", y los demás están de acuerdo.",
-  ops:["genero","calidad","vial","epp"], ok:"genero",
+  ops:["genero", "calidad", "reglamento", "spa"], ok:"genero",
   retro:"Descartarla por esa razón va en contra de la PT-GE-008, que busca procesos de selección libres de sesgos de género y plantea cero tolerancia a la discriminación. La política prevé mecanismos confidenciales para denunciarla."},
  {id:"reglamento", lugar:"CRV", txt:"Una persona recién contratada en el CRV pregunta dónde puede consultar las normas de higiene y seguridad y cuáles son los riesgos de su trabajo. Su compañero le responde que eso no está escrito en ningún lado y que se aprende con la práctica.",
-  ops:["calidad","asoc","reglamento","genero"], ok:"reglamento",
+  ops:["calidad", "ambiental", "reglamento", "genero"], ok:"reglamento",
   retro:"La respuesta del compañero no es correcta. El Reglamento de Higiene y Seguridad Industrial lista los riesgos identificados y su control, debe estar exhibido en al menos dos lugares visibles de la oficina principal y de los proyectos, y se da a conocer a cada trabajador al ingresar."},
+ {id:"sst_acciones", lugar:"Oficina", txt:"En la revisión del SG-SST quedan varias acciones correctivas y de mejora pendientes. En lugar de aplazarlas para el próximo año, el equipo acuerda un plan para cerrarlas.",
+  ops:["ambiental", "genero", "spa", "sst"], ok:"sst",
+  retro:"Es lo que corresponde. Uno de los objetivos del SG-SST 2025-2026, en la PT-SST-010, es garantizar el mejoramiento continuo gestionando como mínimo el 95% de las acciones correctivas, preventivas y de mejora."},
+ {id:"spa_licor", lugar:"Planta de cliente", txt:"Al terminar la jornada, un compañero saca una botella de licor para compartir dentro de la planta del cliente antes de salir, y varios aceptan.",
+  ops:["spa", "ambiental", "calidad", "genero"], ok:"spa",
+  retro:"Compartir licor dentro de la planta incumple la PT-SST-013, que prohíbe vender, almacenar o distribuir bebidas alcohólicas en las instalaciones, y aplica tanto en instalaciones propias como en las del cliente."},
  {id:"ambiental", lugar:"Oficina", txt:"Eres la última persona en salir de la oficina. Ves equipos y luces encendidos y papel reciclable en la caneca de residuos ordinarios, pero te vas sin hacer nada porque no es tu puesto.",
-  ops:["calidad","ambiental","reglamento","ddhh"], ok:"ambiental",
-  retro:"Irse sin hacer nada va en contra de la PT-SGI-004, que aplica a todas las personas de Fractal e incluye entre sus principios la eficiencia energética y la minimización, valorización y aprovechamiento de residuos."},
- {id:"ddhh", lugar:"Nuevo proyecto", txt:"Fractal va a iniciar una operación en un sector donde vive una comunidad que podría verse afectada. Antes de empezar, el equipo analiza los posibles impactos y abre espacios de diálogo con la comunidad.",
-  ops:["epp","vial","ddhh","spa"], ok:"ddhh",
-  retro:"Es lo que corresponde. La PT-GE-002 compromete a Fractal a analizar los impactos en derechos humanos al inicio de nuevos proyectos y, cuando se afecten comunidades, a promover diálogo, consulta y participación con enfoque diferencial."}
+  ops:["calidad", "ambiental", "spa", "genero"], ok:"ambiental",
+  retro:"Irse sin hacer nada va en contra de la PT-SGI-004, que aplica a todas las personas de Fractal e incluye entre sus principios la eficiencia energética y la minimización, valorización y aprovechamiento de residuos."}
 ];
 
 /* ===== ESTADO ===== */
-const CLAVE = "fractal-politicas-v2";
+const CLAVE = "fractal-politicas-v3";
 let estado = {vistas:[], resultado:null};
 try{ const g = localStorage.getItem(CLAVE); if(g){ estado = Object.assign(estado, JSON.parse(g)); } }catch(e){}
 function guardar(){ try{ localStorage.setItem(CLAVE, JSON.stringify(estado)); }catch(e){} }
@@ -518,7 +462,7 @@ function pintarInicio(){
   });
   const n = estado.vistas.length, r = estado.resultado;
   document.getElementById("lista-progreso").innerHTML =
-    `<li class="${todoVisto()?'ok':''}">Lee las políticas <span class="${todoVisto()?'ok':'pend'}">(${n} de 11)</span></li>
+    `<li class="${todoVisto()?'ok':''}">Lee las políticas <span class="${todoVisto()?'ok':'pend'}">(${n} de ${POLITICAS.length})</span></li>
      <li class="${r?'ok':''}">Resuelve 10 situaciones <span class="${r?'ok':'pend'}">(${r ? r.puntaje + ' de 10' : 'pendiente'})</span></li>
      <li>Registra tu participación</li>`;
   document.getElementById("btn-empezar").textContent = (n||r) ? "Continuar" : "Empezar";
